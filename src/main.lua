@@ -2,7 +2,7 @@ require("conf")
 
 local stateMachine = require("state").stateMachine
 local states = require("state").states
-local Menu = require("menu/menu")
+local Menu = require("ui/menu")
 
 function love.load()
     -- Initialize the game state machine
