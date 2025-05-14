@@ -5,28 +5,11 @@ local states = require("state").states
 
 function love.load()
     -- Initialize the game state machine
-    print("hello")
     gameState = stateMachine.new() 
 end
 
 function love.update(dt)
 
-    if gameState:getState() == states.MAIN_MENU then
-        print("Main Menu")
-        if love.keyboard.isDown("space") then
-            gameState:changeState(states.GAME_LOOP)
-        end
-    elseif gameState:getState() == states.GAME_LOOP then
-        print("Game")
-        if love.keyboard.isDown("space") then
-            gameState:changeState(states.GAME_OVER)
-        end
-    else
-        print("Game Over")
-        if love.keyboard.isDown("space") then
-            gameState:changeState(states.MAIN_MENU)
-        end
-    end
 end
 
 function love.draw()
@@ -34,5 +17,16 @@ function love.draw()
 end
 
 function love.mousepressed(x, y, button)
-
+    if gameState:getState() == states.MAIN_MENU then
+        print("Main Menu")
+        gameState:changeState(states.GAME_LOOP)
+    elseif gameState:getState() == states.GAME_LOOP then
+        print("Game")
+        gameState:changeState(states.GAME_OVER)
+    elseif gameState:getState() == states.GAME_OVER then
+        print("Game Over")
+        gameState:changeState(states.MAIN_MENU)
+    else
+        print("Invalid state")
+    end
 end

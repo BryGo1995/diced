@@ -9,7 +9,7 @@ stateMachine.__index = stateMachine
 
 function stateMachine.new()
     local self = setmetatable({}, stateMachine)
-    self.currentState = MAIN_MENU -- Initialize game at the main menu
+    self.currentState = STATES.MAIN_MENU -- Initialize game at the main menu
     self.score = 0
     return self
 end
