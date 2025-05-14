@@ -2,10 +2,14 @@ require("conf")
 
 local stateMachine = require("state").stateMachine
 local states = require("state").states
+local Menu = require("menu/menu")
 
 function love.load()
     -- Initialize the game state machine
     gameState = stateMachine.new() 
+
+    -- Initialize the main menu module
+    menu = Menu.new()
 end
 
 function love.update(dt)
@@ -13,7 +17,7 @@ function love.update(dt)
 end
 
 function love.draw()
-
+    menu:draw() 
 end
 
 function love.mousepressed(x, y, button)
