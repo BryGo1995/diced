@@ -17,7 +17,10 @@ function love.update(dt)
 end
 
 function love.draw()
-    menu:draw() 
+    local currentState = gameState:getState()
+    if currentState == states.MAIN_MENU then
+        menu:draw()
+    end
 end
 
 function love.mousepressed(x, y, button)
