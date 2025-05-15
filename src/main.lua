@@ -32,7 +32,9 @@ function love.mousepressed(x, y, button)
     local currentState = gameState:getState()
     if currentState == states.MAIN_MENU then
         print("Main Menu")
-        gameState:changeState(states.GAME_LOOP)
+        if startButton:isPointInside(x, y) then
+            gameState:changeState(states.GAME_LOOP)
+        end
     elseif currentState == states.GAME_LOOP then
         print("Game")
         gameState:changeState(states.GAME_OVER)
