@@ -13,11 +13,11 @@ function love.load()
     menu = Menu.new()
 
     -- Initialize a button
-    startButton = Button.new("Start Game", 100, 100, 100, 30, {})
+    startButton = Button.new("Start Game", 100, 100, 200, 50, {})
 end
 
 function love.update(dt)
-
+    startButton:update()
 end
 
 function love.draw()

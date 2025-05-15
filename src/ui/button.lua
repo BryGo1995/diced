@@ -23,8 +23,23 @@ function Button.new(text, x, y, width, height, options)
     return self
 end
 
-function Button:update(dt)
+function Button:isPointInside(x, y)
+    return x >= self.x and x <= self.x + self.width and
+           y >= self.y and y <= self.y + self.height
+end
 
+function Button:isHovered(x, y)
+    self.hovered = self:isPointInside(x, y)
+end
+
+function Button:update(dt)
+    -- Check if button is being hovered
+    self:isHovered(love.mouse.getPosition())
+    if self.hovered then
+        self.backgroundColor = {0.8, 0.8, 0.8}
+    else
+        self.backgroundColor = {0.7, 0.7, 0.7}
+    end
 end
 
 function Button:draw()
