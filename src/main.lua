@@ -3,6 +3,7 @@ require("conf")
 local stateMachine = require("state").stateMachine
 local states = require("state").states
 local Menu = require("ui/menu")
+local Button = require("ui/button")
 
 function love.load()
     -- Initialize the game state machine
@@ -10,6 +11,9 @@ function love.load()
 
     -- Initialize the main menu module
     menu = Menu.new()
+
+    -- Initialize a button
+    startButton = Button.new("Start Game", 100, 100, 100, 30, {})
 end
 
 function love.update(dt)
@@ -20,6 +24,7 @@ function love.draw()
     local currentState = gameState:getState()
     if currentState == states.MAIN_MENU then
         menu:draw()
+        startButton:draw()
     end
 end
 
