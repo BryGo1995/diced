@@ -11,20 +11,18 @@ function love.load()
 
     -- Initialize the main menu module
     menu = Menu.new()
+    menu:init()
 
-    -- Initialize a button
-    startButton = Button.new("Start Game", 100, 100, 200, 50, {})
 end
 
 function love.update(dt)
-    startButton:update()
+    menu.update()
 end
 
 function love.draw()
     local currentState = gameState:getState()
     if currentState == states.MAIN_MENU then
         menu:draw()
-        startButton:draw()
     end
 end
 
@@ -32,7 +30,7 @@ function love.mousepressed(x, y, button)
     local currentState = gameState:getState()
     if currentState == states.MAIN_MENU then
         print("Main Menu")
-        if startButton:isPointInside(x, y) then
+        if menu:onClick(x, y) then
             gameState:changeState(states.GAME_LOOP)
         end
     elseif currentState == states.GAME_LOOP then

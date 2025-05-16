@@ -1,6 +1,12 @@
 local Menu = {}
 Menu.__index = Menu
 
+local Button = require("ui/button")
+
+local buttons = {}
+buttonWidth = 200
+buttonHeight = 60
+
 function Menu.new()
     local self = setmetatable({}, Menu)
     self.title = {
@@ -9,12 +15,37 @@ function Menu.new()
         x = love.graphics.getWidth()/2,
         y = love.graphics.getHeight()/3,
     }
+    self.exit = false
 
     return self
 end
 
-function Menu:update()
+function Menu:initializeButtons()
+    -- Start Button
+    buttons = {
+        Button.new(
+            "Start Game",
+            love.graphics.getWidth()/2 - buttonWidth,
+            love.graphics.getHeight()*0.7,
+            buttonWidth,
+            buttonHeight,
+            {
+                onClick = function()
+                    print("Start Button clicked")
+                end
+            } 
+        )
+    }
+end
 
+function Menu:init()
+    self:initializeButtons()
+end
+
+function Menu:update(dt)
+    for _, b in ipairs(buttons) do
+        b:update(dt)
+    end
 end
 
 function Menu:draw()
@@ -23,6 +54,18 @@ function Menu:draw()
     local xoffset = self.title.font:getWidth(self.title.text)/2
     local yoffset = self.title.font:getHeight(self.title.text)/2
     love.graphics.print(self.title.text, self.title.x - xoffset, self.title.y - yoffset)
+
+    for _, b in ipairs(buttons) do
+        b:draw()
+    end
+end
+
+function Menu:onClick(x, y)
+    for _, b in ipairs(buttons) do
+        if b:isPointInside(x, y) then
+            b:onClick()
+        end
+    end
 end
 
 return Menu
