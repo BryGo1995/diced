@@ -25,11 +25,12 @@ function Menu:initializeButtons()
     buttons = {
         Button.new(
             "Start Game",
-            love.graphics.getWidth()/2 - buttonWidth,
-            love.graphics.getHeight()*0.7,
+            love.graphics.getWidth()/2 - buttonWidth/2,
+            love.graphics.getHeight()*0.6,
             buttonWidth,
             buttonHeight,
             {
+                font = love.graphics.setNewFont(30),
                 onClick = function()
                     print("Start Button clicked")
                     self.exit = true
