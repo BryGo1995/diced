@@ -32,6 +32,7 @@ function Menu:initializeButtons()
             {
                 onClick = function()
                     print("Start Button clicked")
+                    self.exit = true
                 end
             } 
         )
@@ -66,6 +67,10 @@ function Menu:onClick(x, y)
             b:onClick()
         end
     end
+end
+
+function Menu:exitStatus()
+    return self.exit
 end
 
 return Menu

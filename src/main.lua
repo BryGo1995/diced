@@ -30,7 +30,8 @@ function love.mousepressed(x, y, button)
     local currentState = gameState:getState()
     if currentState == states.MAIN_MENU then
         print("Main Menu")
-        if menu:onClick(x, y) then
+        menu:onClick(x, y)
+        if menu:exitStatus() then
             gameState:changeState(states.GAME_LOOP)
         end
     elseif currentState == states.GAME_LOOP then
