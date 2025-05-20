@@ -1,6 +1,7 @@
 local GameOver = {}
 GameOver.__index = GameOver
 
+local states = require("state").states
 local Button = require("ui/button")
 
 local buttons = {}
@@ -15,6 +16,7 @@ function GameOver.new()
         x = love.graphics.getWidth()/2,
         y = love.graphics.getHeight()/3
     }
+    self.nextState = nil
 
     return self
 end
@@ -31,7 +33,7 @@ function GameOver:initializeButtons()
             {
                 font = love.graphics.setNewFont(30),
                 onClick = function()
-                    print("Play Again Clicked")
+                    self.nextState = states.GAME_LOOP
                 end
             }
         ),
@@ -44,7 +46,7 @@ function GameOver:initializeButtons()
             {
                 font = love.graphics.setNewFont(30),
                 onClick = function()
-                    print("Main Menu clicked")
+                    self.nextState = states.MAIN_MENU
                 end
             }
         )
@@ -78,6 +80,10 @@ function GameOver:onClick(x, y)
             b:onClick()
         end
     end
+end
+
+function GameOver:getNextState()
+    return self.nextState
 end
 
 return GameOver

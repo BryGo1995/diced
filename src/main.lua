@@ -47,7 +47,9 @@ function love.mousepressed(x, y, button)
     elseif currentState == states.GAME_OVER then
         print("Game Over")
         gameOver:onClick(x, y)
-        gameState:changeState(states.MAIN_MENU)
+        if gameOver:getNextState() ~= nil then
+            gameState:changeState(gameOver:getNextState())
+        end
     else
         print("Invalid state")
     end
