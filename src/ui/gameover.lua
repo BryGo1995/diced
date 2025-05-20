@@ -4,8 +4,8 @@ GameOver.__index = GameOver
 local Button = require("ui/button")
 
 local buttons = {}
-buttonWidth = 200
-buttonHeight = 60
+local buttonWidth = 200
+local buttonHeight = 60
 
 function GameOver.new()
     local self = setmetatable({}, GameOver)

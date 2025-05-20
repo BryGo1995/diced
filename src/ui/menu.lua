@@ -4,8 +4,8 @@ Menu.__index = Menu
 local Button = require("ui/button")
 
 local buttons = {}
-buttonWidth = 200
-buttonHeight = 60
+local buttonWidth = 200
+local buttonHeight = 60
 
 function Menu.new()
     local self = setmetatable({}, Menu)
