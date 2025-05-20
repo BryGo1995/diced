@@ -13,7 +13,7 @@ function Menu.new()
         text = "Diced",
         font = love.graphics.newFont(144),
         x = love.graphics.getWidth()/2,
-        y = love.graphics.getHeight()/3,
+        y = love.graphics.getHeight()/3
     }
     self.exit = false
 

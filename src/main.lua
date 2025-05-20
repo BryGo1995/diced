@@ -16,10 +16,12 @@ function love.load()
 
     -- Initialize the game over screen module
     gameOver = GameOver.new()
+    gameOver:init()
 end
 
 function love.update(dt)
     menu:update(dt)
+    gameOver:update(dt)
 end
 
 function love.draw()
@@ -44,6 +46,7 @@ function love.mousepressed(x, y, button)
         gameState:changeState(states.GAME_OVER)
     elseif currentState == states.GAME_OVER then
         print("Game Over")
+        gameOver:onClick(x, y)
         gameState:changeState(states.MAIN_MENU)
     else
         print("Invalid state")
