@@ -70,8 +70,12 @@ function Menu:onClick(x, y)
     end
 end
 
-function Menu:exitStatus()
+function Menu:getExitStatus()
     return self.exit
+end
+
+function Menu:resetExitStatus()
+    self.exit = false
 end
 
 return Menu

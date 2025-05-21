@@ -86,4 +86,8 @@ function GameOver:getNextState()
     return self.nextState
 end
 
+function GameOver:resetNextState()
+    self.nextState = nil
+end
+
 return GameOver
