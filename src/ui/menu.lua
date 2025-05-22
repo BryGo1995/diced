@@ -1,7 +1,7 @@
 local Menu = {}
 Menu.__index = Menu
 
-local Button = require("ui/button")
+local Button = require("src/ui/button")
 
 local buttons = {}
 local buttonWidth = 200

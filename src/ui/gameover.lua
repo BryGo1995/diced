@@ -1,8 +1,8 @@
 local GameOver = {}
 GameOver.__index = GameOver
 
-local states = require("state").states
-local Button = require("ui/button")
+local states = require("src/state").states
+local Button = require("src/ui/button")
 
 local buttons = {}
 local buttonWidth = 200

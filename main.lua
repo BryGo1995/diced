@@ -1,10 +1,11 @@
 require("conf")
 
-local stateMachine = require("state").stateMachine
-local states = require("state").states
-local Menu = require("ui/menu")
-local Button = require("ui/button")
-local GameOver = require("ui/gameover")
+local stateMachine = require("src/state").stateMachine
+local states = require("src/state").states
+local Menu = require("src/ui/menu")
+local Button = require("src/ui/button")
+local GameLoop = require("src/ui/gameloop")
+local GameOver = require("src/ui/gameover")
 
 function love.load()
     -- Initialize the game state machine
@@ -13,6 +14,10 @@ function love.load()
     -- Initialize the main menu module
     menu = Menu.new()
     menu:init()
+
+    -- Initialize the game loop module
+    gameLoop = GameLoop.new()
+    gameLoop:init()
 
     -- Initialize the game over screen module
     gameOver = GameOver.new()
@@ -28,6 +33,8 @@ function love.draw()
     local currentState = gameState:getState()
     if currentState == states.MAIN_MENU then
         menu:draw()
+    elseif currentState == states.GAME_LOOP then
+        gameLoop:draw()
     elseif currentState == states.GAME_OVER then
         gameOver:draw()
     end
