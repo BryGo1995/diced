@@ -31,7 +31,9 @@ function GameLoop:initializeButtons()
             {
                 font = love.graphics.setNewFont(30),
                 onClick = function()
-                    print("Roll button pressed")
+                    for _, d in ipairs(self.dice) do
+                        d:roll()
+                    end 
                 end
             }
         )
@@ -63,6 +65,14 @@ function GameLoop:draw()
     for _, b in ipairs(buttons) do
         b:draw()
     end
+end
+
+function GameLoop:onClick(x, y)
+    for _, b in ipairs(buttons) do
+        if b:isPointInside(x, y) then
+            b:onClick()
+        end
+    end 
 end
 
 function setDicePositions(numOfDice)
