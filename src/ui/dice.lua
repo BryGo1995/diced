@@ -6,6 +6,8 @@ local sprites = require("src/ui/sprites")
 function Dice.new(numOfSides)
     local self = setmetatable({}, Dice)
     self.numOfSides = numOfSides
+    self.x = 0
+    self.y = 0
     
     self.active = true
     self.selected = false
@@ -14,8 +16,9 @@ function Dice.new(numOfSides)
     return self
 end
 
-function Dice:init()
-
+function Dice:init(position)
+    self.x = position.x
+    self.y = position.y
 end
 
 function Dice:update(dt)
