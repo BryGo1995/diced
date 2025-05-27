@@ -26,7 +26,16 @@ function Dice:update(dt)
 end
 
 function Dice:draw()
-    love.graphics.draw(sprites.d6_1, self.x, self.y)
+    local spriteKey = "d"..self.numOfSides.."_"..self.currentValue
+    love.graphics.draw(sprites[spriteKey], self.x, self.y)
+end
+
+function Dice:roll()
+    self.currentValue = self:randomNumber(self.numOfSides)
+end
+
+function Dice:randomNumber(numOfSides)
+    return love.math.random(1, numOfSides)
 end
 
 return Dice

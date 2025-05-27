@@ -43,6 +43,7 @@ function GameLoop:init()
     for i = 1, self.numOfDice do
         self.dice[i] = Dice.new(6)
         self.dice[i]:init(pos[i])        
+        self.dice[i]:roll()
     end
 
     self:initializeButtons()
