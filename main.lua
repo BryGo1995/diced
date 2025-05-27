@@ -26,6 +26,7 @@ end
 
 function love.update(dt)
     menu:update(dt)
+    gameLoop:update(dt)
     gameOver:update(dt)
 end
 
