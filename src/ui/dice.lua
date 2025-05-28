@@ -17,8 +17,6 @@ function Dice.new(numOfSides)
     self.hitbox = {
         x = 0,
         y = 0,
-        width = 0,
-        height = 0
     }
 
     return self
@@ -27,15 +25,17 @@ end
 function Dice:init(position)
     self.x = position.x
     self.y = position.y
-
 end
 
 function Dice:update(dt)
     self.spriteKey = "d"..self.numOfSides.."_"..self.currentValue
+    self.hitbox.width = sprites[self.spriteKey]:getWidth()
+    self.hitbox.height = sprites[self.spriteKey]:getHeight()
 end
 
 function Dice:draw()
     love.graphics.draw(sprites[self.spriteKey], self.x, self.y)
+    love.graphics.rectangle("line", self.x, self.y, self.hitbox.width, self.hitbox.height)
 end
 
 function Dice:roll()
