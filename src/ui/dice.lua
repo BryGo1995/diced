@@ -8,6 +8,7 @@ function Dice.new(numOfSides)
     self.numOfSides = numOfSides
     self.x = 0
     self.y = 0
+    self.scale = 3
     self.spriteKey = "d6_blank"
     
     self.active = true
@@ -29,12 +30,13 @@ end
 
 function Dice:update(dt)
     self.spriteKey = "d"..self.numOfSides.."_"..self.currentValue
-    self.hitbox.width = sprites[self.spriteKey]:getWidth()
-    self.hitbox.height = sprites[self.spriteKey]:getHeight()
+    self.hitbox.width = sprites[self.spriteKey]:getWidth() * self.scale
+    self.hitbox.height = sprites[self.spriteKey]:getHeight() * self.scale
 end
 
 function Dice:draw()
-    love.graphics.draw(sprites[self.spriteKey], self.x, self.y)
+    sprites[self.spriteKey]:setFilter("nearest", "nearest")
+    love.graphics.draw(sprites[self.spriteKey], self.x, self.y, 0, self.scale, self.scale)
     if self.selected and self.active then
         love.graphics.rectangle("line", self.x, self.y, self.hitbox.width, self.hitbox.height)
     end
