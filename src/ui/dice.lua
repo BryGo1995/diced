@@ -41,7 +41,9 @@ function Dice:draw()
 end
 
 function Dice:roll()
-    self.currentValue = self:randomNumber(self.numOfSides)
+    if self.active then
+        self.currentValue = self:randomNumber(self.numOfSides)
+    end
 end
 
 function Dice:randomNumber(numOfSides)
@@ -49,7 +51,7 @@ function Dice:randomNumber(numOfSides)
 end
 
 function Dice:onClick(x, y)
-    if self:aabbCollision(x, y) then
+    if self:aabbCollision(x, y) and self.active then
         self.selected = not self.selected
     end
 end
@@ -60,6 +62,16 @@ function Dice:aabbCollision(mx, my)
             return true
     end
     return false
+end
+
+function Dice:calculateScore()
+    local calculatedScore = 0
+    if self.active then
+        self.active = false
+        self.selected = false
+        calculatedScore = self.numOfSides - self.currentValue
+    end
+    return calculatedScore
 end
 
 return Dice

@@ -32,7 +32,11 @@ function GameLoop:initializeButtons()
                 font = love.graphics.setNewFont(30),
                 onClick = function()
                     for _, d in ipairs(self.dice) do
-                        d:roll()
+                        if d.selected then
+                            self.score = self.score + d:calculateScore()
+                        else
+                            d:roll()
+                        end
                     end 
                 end
             }
@@ -69,6 +73,8 @@ function GameLoop:draw()
     for _, b in ipairs(buttons) do
         b:draw()
     end
+
+    love.graphics.print(self.score, 100, 850)
 end
 
 function GameLoop:onClick(x, y)
