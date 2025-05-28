@@ -52,6 +52,10 @@ function GameLoop:init()
 end
 
 function GameLoop:update(dt)
+    for i = 1, self.numOfDice do
+        self.dice[i]:update(dt)
+    end
+
     for _, b in ipairs(buttons) do
         b:update()
     end

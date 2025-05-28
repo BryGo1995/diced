@@ -8,10 +8,18 @@ function Dice.new(numOfSides)
     self.numOfSides = numOfSides
     self.x = 0
     self.y = 0
+    self.spriteKey = "d6_blank"
     
     self.active = true
     self.selected = false
     self.currentValue = 0
+
+    self.hitbox = {
+        x = 0,
+        y = 0,
+        width = 0,
+        height = 0
+    }
 
     return self
 end
@@ -19,15 +27,15 @@ end
 function Dice:init(position)
     self.x = position.x
     self.y = position.y
+
 end
 
 function Dice:update(dt)
-
+    self.spriteKey = "d"..self.numOfSides.."_"..self.currentValue
 end
 
 function Dice:draw()
-    local spriteKey = "d"..self.numOfSides.."_"..self.currentValue
-    love.graphics.draw(sprites[spriteKey], self.x, self.y)
+    love.graphics.draw(sprites[self.spriteKey], self.x, self.y)
 end
 
 function Dice:roll()
