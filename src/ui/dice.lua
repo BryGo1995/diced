@@ -35,7 +35,7 @@ end
 
 function Dice:draw()
     love.graphics.draw(sprites[self.spriteKey], self.x, self.y)
-    if self.selected then
+    if self.selected and self.active then
         love.graphics.rectangle("line", self.x, self.y, self.hitbox.width, self.hitbox.height)
     end
 end
@@ -70,6 +70,7 @@ function Dice:calculateScore()
         self.active = false
         self.selected = false
         calculatedScore = self.numOfSides - self.currentValue
+        self.currentValue = "blank"
     end
     return calculatedScore
 end
