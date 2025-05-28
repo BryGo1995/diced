@@ -53,6 +53,9 @@ function love.mousepressed(x, y, button)
     elseif currentState == states.GAME_LOOP then
         print("Game")
         gameLoop:onClick(x, y)
+        if gameLoop:isGameOver() then
+            gameState:changeState(states.GAME_OVER)
+        end
     elseif currentState == states.GAME_OVER then
         print("Game Over")
         gameOver:onClick(x, y)

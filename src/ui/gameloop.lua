@@ -89,6 +89,16 @@ function GameLoop:onClick(x, y)
     end 
 end
 
+function GameLoop:isGameOver()
+    local gameOver = true
+    for i = 1, self.numOfDice do
+        if self.dice[i].active then
+            gameOver = false
+        end
+    end
+    return gameOver
+end
+
 function setDicePositions(numOfDice)
     local dicePositions = {}
     local xoffset = gameWindow.width/verticalCells/2
