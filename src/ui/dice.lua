@@ -35,7 +35,9 @@ end
 
 function Dice:draw()
     love.graphics.draw(sprites[self.spriteKey], self.x, self.y)
-    love.graphics.rectangle("line", self.x, self.y, self.hitbox.width, self.hitbox.height)
+    if self.selected then
+        love.graphics.rectangle("line", self.x, self.y, self.hitbox.width, self.hitbox.height)
+    end
 end
 
 function Dice:roll()
@@ -44,6 +46,20 @@ end
 
 function Dice:randomNumber(numOfSides)
     return love.math.random(1, numOfSides)
+end
+
+function Dice:onClick(x, y)
+    if self:aabbCollision(x, y) then
+        self.selected = not self.selected
+    end
+end
+
+function Dice:aabbCollision(mx, my)
+    if mx > self.x and mx < self.x + self.hitbox.width and
+       my > self.y and my < self.y + self.hitbox.height then
+            return true
+    end
+    return false
 end
 
 return Dice

@@ -72,6 +72,10 @@ function GameLoop:draw()
 end
 
 function GameLoop:onClick(x, y)
+    for i = 1, self.numOfDice do
+        self.dice[i]:onClick(x, y)
+    end
+
     for _, b in ipairs(buttons) do
         if b:isPointInside(x, y) then
             b:onClick()
