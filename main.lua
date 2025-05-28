@@ -55,6 +55,7 @@ function love.mousepressed(x, y, button)
         gameLoop:onClick(x, y)
         if gameLoop:isGameOver() then
             gameState:changeState(states.GAME_OVER)
+            gameOver.scoreDisplay.score = gameLoop.score
         end
     elseif currentState == states.GAME_OVER then
         print("Game Over")
