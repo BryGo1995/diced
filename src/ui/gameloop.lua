@@ -74,7 +74,7 @@ function GameLoop:draw()
         b:draw()
     end
 
-    love.graphics.print(self.score, 100, 850)
+    love.graphics.print("Current score: "..self.score, 100, 850)
 end
 
 function GameLoop:onClick(x, y)
