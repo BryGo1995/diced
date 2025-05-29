@@ -6,6 +6,7 @@ local Button = require("src/ui/button")
 
 gameWindow = {height = 800, width = 1400}
 verticalCells = 5
+horizontalCells = 4
 
 local buttons = {}
 local buttonWidth = 200
@@ -104,11 +105,11 @@ end
 function setDicePositions(numOfDice)
     local dicePositions = {}
     local xoffset = gameWindow.width/verticalCells/2
-    local yoffset = gameWindow.height/verticalCells/2
+    local yoffset = gameWindow.height/horizontalCells/2
     for i = 1, numOfDice do
         local position = {
             x = xoffset + ((i-1)%verticalCells) * (gameWindow.width/verticalCells),
-            y = yoffset + math.floor((i-1)/verticalCells) * (gameWindow.height/verticalCells)
+            y = yoffset + math.floor((i-1)/verticalCells) * (gameWindow.height/horizontalCells)
         }
         table.insert(dicePositions, position)
     end

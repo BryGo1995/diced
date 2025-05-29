@@ -8,7 +8,7 @@ function Dice.new(numOfSides)
     self.numOfSides = numOfSides
     self.x = 0
     self.y = 0
-    self.scale = 2
+    self.scale = 3
     self.active = true
     self.selected = false
     self.currentValue = 0
