@@ -45,6 +45,8 @@ function GameLoop:initializeButtons()
 end
 
 function GameLoop:init()
+    self.score = 0
+
     local pos = setDicePositions(self.numOfDice)
     for i = 1, self.numOfDice do
         self.dice[i] = Dice.new(6)

@@ -30,6 +30,9 @@ end
 function Dice:init(position)
     self.x = position.x
     self.y = position.y
+    self.active = true
+    self.selected = false
+    self.currentValue = 0
 end
 
 function Dice:update(dt)
