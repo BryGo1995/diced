@@ -2,6 +2,7 @@ local Menu = {}
 Menu.__index = Menu
 
 local Button = require("src/ui/button")
+local sprites = require("src/ui/sprites")
 
 local buttons = {}
 local buttonWidth = 200
@@ -13,7 +14,9 @@ function Menu.new()
         text = "Diced",
         font = love.graphics.newFont(144),
         x = love.graphics.getWidth()/2,
-        y = love.graphics.getHeight()/3
+        y = love.graphics.getHeight()/2,
+        sprite = sprites.title,
+        scale = 3
     }
     self.exit = false
 
@@ -52,10 +55,12 @@ end
 
 function Menu:draw()
     -- Draw the title text TODO: put in its own function
-    love.graphics.setFont(self.title.font)
-    local xoffset = self.title.font:getWidth(self.title.text)/2
-    local yoffset = self.title.font:getHeight(self.title.text)/2
-    love.graphics.print(self.title.text, self.title.x - xoffset, self.title.y - yoffset)
+    local r, g, b = love.math.colorFromBytes(107, 155, 115)
+    love.graphics.setBackgroundColor(r, g, b)
+    local xoffset = self.title.sprite:getWidth()/2 * self.title.scale
+    local yoffset = self.title.sprite:getHeight()/2 * self.title.scale
+    self.title.sprite:setFilter("nearest", "nearest")
+    love.graphics.draw(self.title.sprite, self.title.x - xoffset, self.title.y - yoffset, 0, self.title.scale, self.title.scale)
 
     for _, b in ipairs(buttons) do
         b:draw()

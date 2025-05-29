@@ -1,5 +1,7 @@
 sprites = {}
 
+sprites.title = love.graphics.newImage("assets/sprites/Diced-transparent.png")
+
 sprites.d6_1 = love.graphics.newImage("assets/sprites/d6-w/D6-1.png")
 sprites.d6_2 = love.graphics.newImage("assets/sprites/d6-w/D6-2.png")
 sprites.d6_3 = love.graphics.newImage("assets/sprites/d6-w/D6-3.png")
