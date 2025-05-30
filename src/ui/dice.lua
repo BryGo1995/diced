@@ -21,7 +21,9 @@ function Dice.new(numOfSides)
         x = 0,
         y = 0,
         width = 0,
-        height = 0
+        height = 0,
+        lineWidth = 3,
+        lineColor = "white"
     }
 
     return self
@@ -58,6 +60,7 @@ function Dice:draw()
                        self.sprite.height/2
                        )
 
+    love.graphics.setLineWidth(self.hitbox.lineWidth)
     if self.selected and self.active then
         love.graphics.rectangle("line",
                                 self.hitbox.x,
