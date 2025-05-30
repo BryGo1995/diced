@@ -44,7 +44,6 @@ end
 function love.mousepressed(x, y, button)
     local currentState = gameState:getState()
     if currentState == states.MAIN_MENU then
-        print("Main Menu")
         menu:onClick(x, y)
         if menu:getExitStatus() then
             gameState:changeState(states.GAME_LOOP)
@@ -52,14 +51,12 @@ function love.mousepressed(x, y, button)
             menu:resetExitStatus()
         end
     elseif currentState == states.GAME_LOOP then
-        print("Game")
         gameLoop:onClick(x, y)
         if gameLoop:isGameOver() then
             gameState:changeState(states.GAME_OVER)
             gameOver.scoreDisplay.score = gameLoop.score
         end
     elseif currentState == states.GAME_OVER then
-        print("Game Over")
         gameOver:onClick(x, y)
         if gameOver:getNextState() ~= nil then
             gameState:changeState(gameOver:getNextState())
