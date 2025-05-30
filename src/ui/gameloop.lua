@@ -80,16 +80,26 @@ function GameLoop:draw()
     love.graphics.print("Current score: "..self.score, 100, 850)
 end
 
+function GameLoop:isButtonActive()
+    for i = 1, self.numOfDice do
+        if self.dice[i].selected then
+            return true 
+        end
+    end
+end
+
 function GameLoop:onClick(x, y)
     for i = 1, self.numOfDice do
         self.dice[i]:onClick(x, y)
     end
 
-    for _, b in ipairs(buttons) do
-        if b:isPointInside(x, y) then
-            b:onClick()
-        end
-    end 
+    if self:isButtonActive() then
+        for _, b in ipairs(buttons) do
+            if b:isPointInside(x, y) then
+                b:onClick()
+            end
+        end 
+    end
 end
 
 function GameLoop:isGameOver()

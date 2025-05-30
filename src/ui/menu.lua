@@ -14,9 +14,9 @@ function Menu.new()
         text = "Diced",
         font = love.graphics.newFont(144),
         x = love.graphics.getWidth()/2,
-        y = love.graphics.getHeight()/2,
+        y = love.graphics.getHeight()*0.6,
         sprite = sprites.title,
-        scale = 3
+        scale = 3.6
     }
     self.exit = false
 
@@ -29,7 +29,7 @@ function Menu:initializeButtons()
         Button.new(
             "Start Game",
             love.graphics.getWidth()/2 - buttonWidth/2,
-            love.graphics.getHeight()*0.6,
+            love.graphics.getHeight()*0.8,
             buttonWidth,
             buttonHeight,
             {
