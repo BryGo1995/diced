@@ -12,11 +12,14 @@ local buttons = {}
 local buttonWidth = 200
 local buttonHeight = 60
 
-function GameLoop.new(numOfDice)
+function GameLoop.new(numOfSixSidedDice, numOfEightSidedDice, numOfTenSideDice)
     local self = setmetatable({}, GameLoop)
     self.score = 0
     self.dice = {}
-    self.numOfDice = numOfDice
+    self.numOfSixSidedDice = numOfSixSidedDice
+    self.numOfEightSidedDice = numOfEightSidedDice
+    self.numOfTenSideDice = numOfTenSideDice
+    self.numOfDice = numOfSixSidedDice + numOfEightSidedDice + numOfTenSideDice
 
     return self
 end
