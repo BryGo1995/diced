@@ -52,12 +52,25 @@ function GameLoop:init()
     self.score = 0
 
     local pos = setDicePositions(self.numOfDice)
-    for i = 1, self.numOfDice do
-        self.dice[i] = Dice.new(6)
-        self.dice[i]:init(pos[i])        
-        self.dice[i]:roll()
+    local index = 1
+    for index = 1, self.numOfSixSidedDice do
+        self.dice[index] = Dice.new(6)
+        self.dice[index]:init(pos[index])        
+        self.dice[index]:roll()
     end
 
+    for index = self.numOfSixSidedDice + 1, self.numOfSixSidedDice + self.numOfEightSidedDice do
+        self.dice[index] = Dice.new(8)
+        self.dice[index]:init(pos[index])        
+        self.dice[index]:roll()
+    end
+
+    for index = self.numOfSixSidedDice + self.numOfEightSidedDice + 1, self.numOfDice do
+        self.dice[index] = Dice.new(10)
+        self.dice[index]:init(pos[index])        
+        self.dice[index]:roll()
+    end
+    
     self:initializeButtons()
 end
 
