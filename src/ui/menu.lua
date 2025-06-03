@@ -63,8 +63,10 @@ function Menu:draw()
     love.graphics.draw(self.title.sprite, self.title.x - xoffset, self.title.y - yoffset, 0, self.title.scale, self.title.scale)
 
     for _, b in ipairs(buttons) do
-        b:draw()
+        --b:draw()
     end
+
+    love.graphics.draw(sprites.startButton, love.graphics.getWidth()/2 - sprites.startButton:getWidth()/2, love.graphics.getHeight()*0.8)
 end
 
 function Menu:onClick(x, y)
