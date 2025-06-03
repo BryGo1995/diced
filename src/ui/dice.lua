@@ -37,7 +37,7 @@ function Dice:init(position)
     self.currentValue = 0
 end
 
-function Dice:update(dt)
+function Dice:update(dt, position)
     self.sprite.key = "d"..self.numOfSides.."_"..self.currentValue
     self.sprite.width = sprites[self.sprite.key]:getWidth()
     self.sprite.height = sprites[self.sprite.key]:getHeight()
@@ -75,6 +75,11 @@ function Dice:roll()
     if self.active then
         self.currentValue = self:randomNumber(self.numOfSides)
     end
+end
+
+function Dice:setPosition(position)
+    self.x = position.x
+    self.y = position.y
 end
 
 function Dice:randomNumber(numOfSides)

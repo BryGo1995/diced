@@ -35,12 +35,15 @@ function GameLoop:initializeButtons()
             {
                 font = love.graphics.setNewFont(30),
                 onClick = function()
-                    for _, d in ipairs(self.dice) do
-                        if d.selected then
-                            self.score = self.score + d:calculateScore()
+                    local pos = setDicePositions(self.numOfDice)
+                    local randomDicePositions = self:randomizeDicePositions()
+                    for i = 1, self.numOfDice do
+                        if self.dice[i].selected then
+                            self.score = self.score + self.dice[i]:calculateScore()
                         else
-                            d:roll()
+                            self.dice[i]:roll()
                         end
+                        self.dice[i]:setPosition(pos[randomDicePositions[i]])
                     end 
                 end
             }
@@ -52,22 +55,23 @@ function GameLoop:init()
     self.score = 0
 
     local pos = setDicePositions(self.numOfDice)
+    local randomDicePositions = self:randomizeDicePositions()
     local index = 1
     for index = 1, self.numOfSixSidedDice do
         self.dice[index] = Dice.new(6)
-        self.dice[index]:init(pos[index])        
+        self.dice[index]:init(pos[randomDicePositions[index]])        
         self.dice[index]:roll()
     end
 
     for index = self.numOfSixSidedDice + 1, self.numOfSixSidedDice + self.numOfEightSidedDice do
         self.dice[index] = Dice.new(8)
-        self.dice[index]:init(pos[index])        
+        self.dice[index]:init(pos[randomDicePositions[index]])        
         self.dice[index]:roll()
     end
 
     for index = self.numOfSixSidedDice + self.numOfEightSidedDice + 1, self.numOfDice do
         self.dice[index] = Dice.new(10)
-        self.dice[index]:init(pos[index])        
+        self.dice[index]:init(pos[randomDicePositions[index]])        
         self.dice[index]:roll()
     end
     
@@ -86,7 +90,9 @@ end
 
 function GameLoop:draw()
     for i = 1, self.numOfDice do
-        self.dice[i]:draw()
+        if self.dice[i].active then
+            self.dice[i]:draw()
+        end
     end
 
     for _, b in ipairs(buttons) do
@@ -126,6 +132,22 @@ function GameLoop:isGameOver()
         end
     end
     return gameOver
+end
+
+function GameLoop:randomizeDicePositions()
+    local dicePositions = {}
+    for i = 1, self.numOfDice do
+        dicePositions[i] = i
+    end
+
+    for i = 1, self.numOfDice do
+        local randomIndex = math.random(1, #dicePositions)
+        local temp = dicePositions[i]
+        dicePositions[i] = dicePositions[randomIndex]
+        dicePositions[randomIndex] = temp
+    end
+
+    return dicePositions
 end
 
 function setDicePositions(numOfDice)
