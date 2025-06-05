@@ -66,6 +66,15 @@ function Menu:draw()
         --b:draw()
     end
 
+    local font = love.graphics.newImageFont("assets/fonts/demo-font.png",
+        " abcdefghijklmnopqrstuvwxyz" ..
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ0" ..
+        "123456789.,!?-+/():;%&`'*#=[]\"")
+
+    love.graphics.setDefaultFilter("nearest", "nearest")
+    love.graphics.setFont(font)
+    love.graphics.print("START", 100, 100, 0, 4, 4)
+
     love.graphics.draw(sprites.startButton, love.graphics.getWidth()/2 - sprites.startButton:getWidth()/2, love.graphics.getHeight()*0.8)
 end
 
