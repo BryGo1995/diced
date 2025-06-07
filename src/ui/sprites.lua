@@ -1,5 +1,7 @@
 sprites = {}
 
+love.graphics.setDefaultFilter("nearest", "nearest")
+
 sprites.title = love.graphics.newImage("assets/sprites/Diced-transparent.png")
 
 sprites.startButton = love.graphics.newImage("assets/sprites/menu/Start-Tan.png")

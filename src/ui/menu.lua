@@ -3,6 +3,7 @@ Menu.__index = Menu
 
 local Button = require("src/ui/button")
 local sprites = require("src/ui/sprites")
+local fonts = require("src/ui/fonts")
 
 local buttons = {}
 local buttonWidth = 200
@@ -66,13 +67,7 @@ function Menu:draw()
         --b:draw()
     end
 
-    local font = love.graphics.newImageFont("assets/fonts/demo-font.png",
-        " abcdefghijklmnopqrstuvwxyz" ..
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZ0" ..
-        "123456789.,!?-+/():;%&`'*#=[]\"")
-
-    love.graphics.setDefaultFilter("nearest", "nearest")
-    love.graphics.setFont(font)
+    love.graphics.setFont(fonts.default)
     love.graphics.print("START", 100, 100, 0, 4, 4)
 
     love.graphics.draw(sprites.startButton, love.graphics.getWidth()/2 - sprites.startButton:getWidth()/2, love.graphics.getHeight()*0.8)

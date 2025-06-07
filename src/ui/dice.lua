@@ -49,7 +49,6 @@ function Dice:update(dt, position)
 end
 
 function Dice:draw()
-    sprites[self.sprite.key]:setFilter("nearest", "nearest")
     love.graphics.draw(sprites[self.sprite.key], 
                        self.x,
                        self.y,
