@@ -6,8 +6,8 @@ local sprites = require("src/ui/sprites")
 local fonts = require("src/ui/fonts")
 
 local buttons = {}
-local buttonWidth = 200
-local buttonHeight = 60
+local buttonWidth = 300
+local buttonHeight = 70
 
 function Menu.new()
     local self = setmetatable({}, Menu)
@@ -28,13 +28,14 @@ function Menu:initializeButtons()
     -- Start Button
     buttons = {
         Button.new(
-            "Start Game",
+            "START",
             love.graphics.getWidth()/2 - buttonWidth/2,
             love.graphics.getHeight()*0.8,
             buttonWidth,
             buttonHeight,
             {
-                font = love.graphics.setNewFont(30),
+                font = fonts.default,
+                textScaler = 7,
                 onClick = function()
                     print("Start Button clicked")
                     self.exit = true
@@ -60,17 +61,16 @@ function Menu:draw()
     love.graphics.setBackgroundColor(r, g, b)
     local xoffset = self.title.sprite:getWidth()/2 * self.title.scale
     local yoffset = self.title.sprite:getHeight()/2 * self.title.scale
-    self.title.sprite:setFilter("nearest", "nearest")
     love.graphics.draw(self.title.sprite, self.title.x - xoffset, self.title.y - yoffset, 0, self.title.scale, self.title.scale)
 
     for _, b in ipairs(buttons) do
-        --b:draw()
+        b:draw()
     end
 
     love.graphics.setFont(fonts.default)
     love.graphics.print("START", 100, 100, 0, 4, 4)
 
-    love.graphics.draw(sprites.startButton, love.graphics.getWidth()/2 - sprites.startButton:getWidth()/2, love.graphics.getHeight()*0.8)
+    --love.graphics.draw(sprites.startButton, love.graphics.getWidth()/2 - sprites.startButton:getWidth()/2, love.graphics.getHeight()*0.8)
 end
 
 function Menu:onClick(x, y)

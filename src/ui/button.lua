@@ -15,7 +15,8 @@ function Button.new(text, x, y, width, height, options)
     self.options = options or {}
     self.backgroundColor = options.backgroundColor or {0.7, 0.7, 0.7}
     self.borderColor = options.borderColor or {0.3, 0.3, 0.3}
-    self.textColor = options.textColor or {0, 0, 0}
+    self.textColor = options.textColor or {1, 1, 1}
+    self.textScaler = options.textScaler or 1
     self.font = options.font or love.graphics.getFont()
     self.onClick = options.onClick or function() end
     self.hovered = false
@@ -38,7 +39,7 @@ function Button:update(dt)
     if self.hovered then
         self.backgroundColor = {0.8, 0.8, 0.8}
     else
-        self.backgroundColor = {0.7, 0.7, 0.7}
+        self.backgroundColor = {love.math.colorFromBytes(43, 184, 177)}
     end
 end
 
@@ -54,9 +55,9 @@ function Button:draw()
     -- Draw button text
     love.graphics.setColor(self.textColor)
     love.graphics.setFont(self.font)
-    local textX = self.x + self.width/2 - self.font:getWidth(self.text)/2
-    local textY = self.y + self.height/2 - self.font:getHeight(self.text)/2
-    love.graphics.print(self.text, textX, textY)
+    local textX = self.x + self.width/2 - self.font:getWidth(self.text)*self.textScaler/2
+    local textY = self.y + self.height/2 - self.font:getHeight(self.text)*self.textScaler/2
+    love.graphics.print(self.text, textX, textY, 0, self.textScaler, self.textScaler)
 
     -- Reset color
     love.graphics.setColor(1, 1, 1)
