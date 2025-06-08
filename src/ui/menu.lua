@@ -66,11 +66,6 @@ function Menu:draw()
     for _, b in ipairs(buttons) do
         b:draw()
     end
-
-    love.graphics.setFont(fonts.default)
-    love.graphics.print("START", 100, 100, 0, 4, 4)
-
-    --love.graphics.draw(sprites.startButton, love.graphics.getWidth()/2 - sprites.startButton:getWidth()/2, love.graphics.getHeight()*0.8)
 end
 
 function Menu:onClick(x, y)
