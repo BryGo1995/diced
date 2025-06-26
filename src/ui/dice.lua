@@ -2,6 +2,7 @@ local Dice = {}
 Dice.__index = Dice
 
 local sprites = require("src/ui/sprites")
+local fonts = require("src/ui/fonts")
 
 function Dice.new(numOfSides)
     local self = setmetatable({}, Dice)
@@ -38,7 +39,7 @@ function Dice:init(position)
 end
 
 function Dice:update(dt, position)
-    self.sprite.key = "d"..self.numOfSides.."_"..self.currentValue
+    self.sprite.key = "d"..self.numOfSides.."_blank"
     self.sprite.width = sprites[self.sprite.key]:getWidth()
     self.sprite.height = sprites[self.sprite.key]:getHeight()
 
@@ -58,6 +59,16 @@ function Dice:draw()
                        self.sprite.width/2,
                        self.sprite.height/2
                        )
+    
+    love.graphics.setFont(fonts.diceDefault)
+    love.graphics.print(self.currentValue, 
+                        self.x, 
+                        self.y, 
+                        0, 
+                        self.scale, 
+                        self.scale,
+                        fonts.diceDefault:getWidth(self.currentValue)/2,
+                        fonts.diceDefault:getHeight(self.currentValue)/2)
 
     love.graphics.setLineWidth(self.hitbox.lineWidth)
     if self.selected and self.active then

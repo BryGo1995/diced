@@ -66,6 +66,9 @@ function Menu:draw()
     for _, b in ipairs(buttons) do
         b:draw()
     end
+
+    love.graphics.setFont(fonts.diceDefault)
+    love.graphics.print("0 1 2 3 4 5 6 7 8 9 -", 100, 100)
 end
 
 function Menu:onClick(x, y)
