@@ -34,6 +34,7 @@ function Menu:initializeButtons()
             buttonWidth,
             buttonHeight,
             {
+                backgroundColor = {love.math.colorFromBytes(43, 184, 177)},
                 font = fonts.default,
                 textScaler = 7,
                 onClick = function()
@@ -67,8 +68,6 @@ function Menu:draw()
         b:draw()
     end
 
-    love.graphics.setFont(fonts.diceDefault)
-    love.graphics.print("0 1 2 3 4 5 6 7 8 9 -", 100, 100)
 end
 
 function Menu:onClick(x, y)

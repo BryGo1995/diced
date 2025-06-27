@@ -34,18 +34,17 @@ function Button:isHovered(x, y)
 end
 
 function Button:update(dt)
-    -- Check if button is being hovered
-    self:isHovered(love.mouse.getPosition())
-    if self.hovered then
-        self.backgroundColor = {0.8, 0.8, 0.8}
-    else
-        self.backgroundColor = {love.math.colorFromBytes(43, 184, 177)}
-    end
+
 end
 
 function Button:draw()
     -- Draw button background
-    love.graphics.setColor(self.backgroundColor)
+    self:isHovered(love.mouse.getPosition())
+    if self.hovered then 
+        love.graphics.setColor({0.7, 0.7, 0.7})
+    else
+        love.graphics.setColor(self.backgroundColor)
+    end
     love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
 
     -- Draw button border
