@@ -110,7 +110,9 @@ function GameLoop:draw()
     end
 
     love.graphics.setFont(fonts.default)
-    love.graphics.print("CURRENT SCORE: "..self.score, 20, love.graphics.getHeight()*0.9, 0, 5, 5)
+    local textX = 20
+    local textY = love.graphics.getHeight()*0.91
+    love.graphics.print("SCORE: "..self.score, textX, textY, 0, 5, 5)
 end
 
 function GameLoop:isButtonActive()
