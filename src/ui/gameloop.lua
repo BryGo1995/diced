@@ -35,6 +35,7 @@ function GameLoop:initializeButtons()
             buttonWidth,
             buttonHeight,
             {
+                backgroundColor = {love.math.colorFromBytes(43, 184, 177)},
                 font = fonts.default,
                 textScaler = 5,
                 onClick = function()
