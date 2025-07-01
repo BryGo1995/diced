@@ -68,6 +68,9 @@ function Menu:draw()
         b:draw()
     end
 
+    love.graphics.setFont(fonts.default)
+    love.graphics.print("ABC0123456789:", 100, 100, 0, 5, 5)
+
 end
 
 function Menu:onClick(x, y)

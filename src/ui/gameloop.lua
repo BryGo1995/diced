@@ -3,6 +3,7 @@ GameLoop.__index = GameLoop
 
 local Dice = require("src/ui/dice")
 local Button = require("src/ui/button")
+local fonts = require("src/ui/fonts")
 
 gameWindow = {height = 800, width = 1400}
 verticalCells = 5
@@ -28,13 +29,14 @@ end
 function GameLoop:initializeButtons()
     buttons = {
         Button.new(
-            "Roll Dice",
+            "ROLL",
             love.graphics.getWidth()/2 - buttonWidth/2,
             love.graphics.getHeight()*0.9,
             buttonWidth,
             buttonHeight,
             {
-                font = love.graphics.setNewFont(30),
+                font = fonts.default,
+                textScaler = 5,
                 onClick = function()
                     local pos = setDicePositions(self.numOfDice)
                     local randomDicePositions = self:randomizeDicePositions()
@@ -106,7 +108,8 @@ function GameLoop:draw()
         b:draw()
     end
 
-    love.graphics.print("Current score: "..self.score, 100, 850)
+    love.graphics.setFont(fonts.default)
+    love.graphics.print("CURRENT SCORE: "..self.score, 20, love.graphics.getHeight()*0.9, 0, 5, 5)
 end
 
 function GameLoop:isButtonActive()
