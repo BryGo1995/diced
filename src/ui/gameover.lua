@@ -3,6 +3,7 @@ GameOver.__index = GameOver
 
 local states = require("src/state").states
 local Button = require("src/ui/button")
+local fonts = require("src/ui/fonts")
 
 local buttons = {}
 local buttonWidth = 200
@@ -12,16 +13,18 @@ function GameOver.new()
     local self = setmetatable({}, GameOver)
     self.title = {
         text = "GAME OVER",
-        font = love.graphics.newFont(144),
+        font = fonts.default,
         x = love.graphics.getWidth()/2,
-        y = love.graphics.getHeight()/3
+        y = love.graphics.getHeight()/4,
+        scale = 18
     }
     self.scoreDisplay = {
         score = 0,
-        text = "Final Score: ",
-        font = love.graphics.newFont(72),
+        text = "FINAL SCORE: ",
+        font = fonts.default,
         x = love.graphics.getWidth()/2,
-        y = love.graphics.getHeight()*0.5
+        y = love.graphics.getHeight()*0.5,
+        scale = 7
     }
     self.nextState = nil
 
@@ -32,13 +35,14 @@ function GameOver:initializeButtons()
     -- Play again button
     buttons = {
         Button.new(
-            "Play Again",
+            "PLAY AGAIN",
             love.graphics.getWidth()/2 - buttonWidth/2,
             love.graphics.getHeight()*0.6,
             buttonWidth,
             buttonHeight,
             {
-                font = love.graphics.setNewFont(30),
+                font = fonts.default,
+                textScaler = 5,
                 onClick = function()
                     self.nextState = states.GAME_LOOP
                     self.scoreDisplay.score = 0
@@ -46,13 +50,14 @@ function GameOver:initializeButtons()
             }
         ),
         Button.new(
-            "Main Menu",
+            "MENU",
             love.graphics.getWidth()/2 - buttonWidth/2,
             love.graphics.getHeight()*0.7,
             buttonWidth,
             buttonHeight,
             {
-                font = love.graphics.setNewFont(30),
+                font = fonts.default,
+                textScaler = 5,
                 onClick = function()
                     self.nextState = states.MAIN_MENU
                     self.scoreDisplay.score = 0
@@ -76,13 +81,13 @@ function GameOver:draw()
     love.graphics.setFont(self.title.font)
     local xoffset = self.title.font:getWidth(self.title.text)/2
     local yoffset = self.title.font:getHeight(self.title.text)/2
-    love.graphics.print(self.title.text, self.title.x - xoffset, self.title.y - yoffset)
+    love.graphics.print(self.title.text, self.title.x, self.title.y, 0, self.title.scale, self.title.scale, xoffset, yoffset)
 
     love.graphics.setFont(self.scoreDisplay.font)
     local scoreText = self.scoreDisplay.text..self.scoreDisplay.score
     xoffset = self.scoreDisplay.font:getWidth(scoreText)/2
     yoffset = self.scoreDisplay.font:getHeight(scoreText)/2
-    love.graphics.print(scoreText, self.scoreDisplay.x - xoffset, self.scoreDisplay.y - yoffset)
+    love.graphics.print(scoreText, self.scoreDisplay.x, self.scoreDisplay.y, 0, self.scoreDisplay.scale, self.scoreDisplay.scale, xoffset, yoffset)
 
     for _, b in ipairs(buttons) do
         b:draw()
