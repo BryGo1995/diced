@@ -19,6 +19,7 @@ function Menu.new()
         sprite = sprites.title,
         scale = 3.6
     }
+    self.displayStats = false
     self.exit = false
 
     return self
@@ -30,7 +31,7 @@ function Menu:initializeButtons()
         Button.new(
             "START",
             love.graphics.getWidth()/2 - buttonWidth/2,
-            love.graphics.getHeight()*0.8,
+            love.graphics.getHeight()*0.7,
             buttonWidth,
             buttonHeight,
             {
@@ -42,6 +43,22 @@ function Menu:initializeButtons()
                     self.exit = true
                 end
             } 
+        ),
+        Button.new(
+            "STATS",
+            love.graphics.getWidth()/2 - buttonWidth/2,
+            love.graphics.getHeight()*0.8,
+            buttonWidth,
+            buttonHeight,
+            {
+                backgroundColor = {love.math.colorFromBytes(43, 184, 177)},
+                font = fonts.default,
+                textScaler = 7,
+                onClick = function()
+                    print("Stats Button Clicked")
+                    self.displayStats = not self.displayStats
+                end
+            }
         )
     }
 end
@@ -68,6 +85,10 @@ function Menu:draw()
         b:draw()
     end
 
+    if self.displayStats then
+        self.displayGameStats()
+    end
+
 end
 
 function Menu:onClick(x, y)
@@ -76,6 +97,14 @@ function Menu:onClick(x, y)
             b:onClick()
         end
     end
+end
+
+function Menu:displayGameStats()
+    local moduleWidth = love.graphics.getWidth()*0.5
+    local moduleHeight = love.graphics.getHeight()*0.5
+    local moduleX = love.graphics.getWidth()/2 - moduleWidth/2
+    local moduleY = love.graphics.getHeight()/2 - moduleHeight/2
+    love.graphics.rectangle("fill", moduleX, moduleY, moduleWidth, moduleHeight)
 end
 
 function Menu:getExitStatus()
