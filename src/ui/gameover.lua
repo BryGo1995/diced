@@ -26,23 +26,30 @@ function GameOver.new()
         y = love.graphics.getHeight()*0.5,
         scale = 7
     }
+    self.defaultFont = fonts.default
     self.nextState = nil
 
     return self
 end
 
 function GameOver:initializeButtons()
+    local scaler = 5
+    local padding = 10
+    local playButtonWidth = self.defaultFont:getWidth("PLAY AGAIN")*scaler+padding
+    local playButtonHeight = self.defaultFont:getHeight("PLAY AGAIN")*scaler+padding
+    local menuButtonWidth = self.defaultFont:getWidth("MENU")*scaler+padding
+    local menuButtonHeight = self.defaultFont:getHeight("MENU")*scaler+padding
     -- Play again button
     buttons = {
         Button.new(
             "PLAY AGAIN",
-            love.graphics.getWidth()/2 - buttonWidth/2,
+            love.graphics.getWidth()/2 - playButtonWidth/2,
             love.graphics.getHeight()*0.6,
-            buttonWidth,
-            buttonHeight,
+            playButtonWidth,
+            playButtonHeight,
             {
-                font = fonts.default,
-                textScaler = 5,
+                font = self.defaultFont,
+                textScaler = scaler,
                 onClick = function()
                     self.nextState = states.GAME_LOOP
                     self.scoreDisplay.score = 0
@@ -53,11 +60,11 @@ function GameOver:initializeButtons()
             "MENU",
             love.graphics.getWidth()/2 - buttonWidth/2,
             love.graphics.getHeight()*0.7,
-            buttonWidth,
-            buttonHeight,
+            menuButtonWidth,
+            menuButtonHeight,
             {
-                font = fonts.default,
-                textScaler = 5,
+                font = self.defaultFont,
+                textScaler = scaler,
                 onClick = function()
                     self.nextState = states.MAIN_MENU
                     self.scoreDisplay.score = 0
