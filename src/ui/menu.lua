@@ -100,11 +100,17 @@ function Menu:onClick(x, y)
 end
 
 function Menu:displayGameStats()
+    love.graphics.setColor(0.5, 0.5, 0.5)
     local moduleWidth = love.graphics.getWidth()*0.5
     local moduleHeight = love.graphics.getHeight()*0.5
     local moduleX = love.graphics.getWidth()/2 - moduleWidth/2
     local moduleY = love.graphics.getHeight()/2 - moduleHeight/2
     love.graphics.rectangle("fill", moduleX, moduleY, moduleWidth, moduleHeight)
+    love.graphics.setColor(1, 1, 1)
+
+    local textAnchor = {x = moduleX + 30, y = moduleY + 30}
+    local textScale = 2
+    love.graphics.print("BEST RUN: 5", textAnchor.x, textAnchor.y, 0, textScale, textScale)
 end
 
 function Menu:getExitStatus()
