@@ -110,7 +110,11 @@ function Menu:displayGameStats()
 
     local textAnchor = {x = moduleX + 30, y = moduleY + 30}
     local textScale = 2
-    love.graphics.print("BEST RUN: 5", textAnchor.x, textAnchor.y, 0, textScale, textScale)
+    local lowScore = love.filesystem.read("lowscore.txt")
+    if lowScore == nil then
+        lowScore = "GET TO PLAYING!"
+    end
+    love.graphics.print("BEST RUN: " .. lowScore, textAnchor.x, textAnchor.y, 0, textScale, textScale)
 end
 
 function Menu:getExitStatus()

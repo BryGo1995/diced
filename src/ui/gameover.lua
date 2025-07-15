@@ -117,4 +117,14 @@ function GameOver:resetNextState()
     self.nextState = nil
 end
 
+function GameOver:writeScoreToFile()
+    local currentLowScore = love.filesystem.read("lowscore.txt")
+    if currentLowScore == nil then
+        currentLowScore = self.scoreDisplay.score
+    end
+    if self.scoreDisplay.score <= tonumber(currentLowScore) then
+        love.filesystem.write("lowscore.txt", self.scoreDisplay.score)
+    end
+end
+
 return GameOver
