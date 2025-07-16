@@ -13,12 +13,12 @@ function Button.new(text, x, y, width, height, options)
 
     -- Optional properties
     self.options = options or {}
-    self.backgroundColor = options.backgroundColor or {0.7, 0.7, 0.7}
-    self.borderColor = options.borderColor or {0.3, 0.3, 0.3}
-    self.textColor = options.textColor or {1, 1, 1}
-    self.textScaler = options.textScaler or 1
-    self.font = options.font or love.graphics.getFont()
-    self.onClick = options.onClick or function() end
+    self.backgroundColor = self.options.backgroundColor or {0.7, 0.7, 0.7}
+    self.borderColor = self.options.borderColor or {0.3, 0.3, 0.3}
+    self.textColor = self.options.textColor or {1, 1, 1}
+    self.textScaler = self.options.textScaler or 1
+    self.font = self.options.font or love.graphics.getFont()
+    self.onClick = self.options.onClick or function() end
     self.hovered = false
     
     return self
