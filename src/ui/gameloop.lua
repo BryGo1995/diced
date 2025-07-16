@@ -62,7 +62,7 @@ function GameLoop:init()
     local randomDicePositions = self:randomizeDicePositions()
     local index = 1
     for index = 1, self.numOfSixSidedDice do
-        self.dice[index] = Dice.new(6)
+        self.dice[index] = Dice.new(6, {font = fonts.diceDots})
         self.dice[index]:init(pos[randomDicePositions[index]])        
         self.dice[index]:roll()
     end
