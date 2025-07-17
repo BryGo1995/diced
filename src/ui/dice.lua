@@ -125,7 +125,7 @@ function Dice:calculateScore()
     return calculatedScore
 end
 
-function Dice:checkScore()
+function Dice:peekScore()
     local calculatedScore = 0
     if self.active then
         calculatedScore = self.numOfSides - self.currentValue
