@@ -125,4 +125,12 @@ function Dice:calculateScore()
     return calculatedScore
 end
 
+function Dice:checkScore()
+    local calculatedScore = 0
+    if self.active then
+        calculatedScore = self.numOfSides - self.currentValue
+    end
+    return calculatedScore
+end
+
 return Dice

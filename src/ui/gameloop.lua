@@ -16,6 +16,7 @@ local buttonHeight = 60
 function GameLoop.new(numOfSixSidedDice, numOfEightSidedDice, numOfTenSidedDice, numOfTwelveSidedDice)
     local self = setmetatable({}, GameLoop)
     self.score = 0
+    self.projectedScore = 0
     self.dice = {}
     self.numOfSixSidedDice = numOfSixSidedDice
     self.numOfEightSidedDice = numOfEightSidedDice
@@ -89,9 +90,14 @@ function GameLoop:init()
 end
 
 function GameLoop:update(dt)
+    local cumulativeScore = 0
     for i = 1, self.numOfDice do
         self.dice[i]:update(dt)
+        if self.dice[i].selected then
+            cumulativeScore = cumulativeScore + self.dice[i]:checkScore()
+        end
     end
+    self.projectedScore = cumulativeScore
 
     for _, b in ipairs(buttons) do
         b:update()
@@ -112,7 +118,7 @@ function GameLoop:draw()
     love.graphics.setFont(fonts.default)
     local textX = 20
     local textY = love.graphics.getHeight()*0.91
-    love.graphics.print("SCORE: "..self.score, textX, textY, 0, 5, 5)
+    love.graphics.print("SCORE: "..self.score.." + "..self.projectedScore, textX, textY, 0, 5, 5)
 end
 
 function GameLoop:isButtonActive()
