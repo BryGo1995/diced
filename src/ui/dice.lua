@@ -119,7 +119,7 @@ function Dice:calculateScore()
     if self.active then
         self.active = false
         self.selected = false
-        calculatedScore = self.numOfSides - self.currentValue
+        calculatedScore = self:peekScore()
         self.currentValue = "blank"
     end
     return calculatedScore
@@ -127,9 +127,7 @@ end
 
 function Dice:peekScore()
     local calculatedScore = 0
-    if self.active then
-        calculatedScore = self.numOfSides - self.currentValue
-    end
+    calculatedScore = self.numOfSides - self.currentValue
     return calculatedScore
 end
 
