@@ -94,7 +94,7 @@ function GameLoop:update(dt)
     for i = 1, self.numOfDice do
         self.dice[i]:update(dt)
         if self.dice[i].selected then
-            cumulativeScore = cumulativeScore + self.dice[i]:checkScore()
+            cumulativeScore = cumulativeScore + self.dice[i]:peekScore()
         end
     end
     self.projectedScore = cumulativeScore
