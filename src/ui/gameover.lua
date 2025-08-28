@@ -118,12 +118,25 @@ function GameOver:resetNextState()
 end
 
 function GameOver:writeScoreToFile()
-    local currentLowScore = love.filesystem.read("lowscore.txt")
-    if currentLowScore == nil then
-        currentLowScore = self.scoreDisplay.score
+    local SaveManager = require("src/save_manager")
+    local saveManager = SaveManager.new()
+    
+    -- Load existing save data
+    local saveData, error = saveManager:loadData()
+    if not saveData then
+        -- No existing save, create new one
+        saveData = { lowScore = self.scoreDisplay.score }
+    else
+        -- Check if this is a new low score
+        if self.scoreDisplay.score <= (saveData.lowScore or math.huge) then
+            saveData.lowScore = self.scoreDisplay.score
+        end
     end
-    if self.scoreDisplay.score <= tonumber(currentLowScore) then
-        love.filesystem.write("lowscore.txt", self.scoreDisplay.score)
+    
+    -- Save the data securely
+    local success, message = saveManager:saveData(saveData)
+    if not success then
+        print("Failed to save score: " .. (message or "Unknown error"))
     end
 end
 

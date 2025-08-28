@@ -110,9 +110,15 @@ function Menu:displayGameStats()
 
     local textAnchor = {x = moduleX + 30, y = moduleY + 30}
     local textScale = 2
-    local lowScore = love.filesystem.read("lowscore.txt")
-    if lowScore == nil then
+    local SaveManager = require("src/save_manager")
+    local saveManager = SaveManager.new()
+    
+    local saveData, error = saveManager:loadData()
+    local lowScore
+    if not saveData or not saveData.lowScore then
         lowScore = "GET TO PLAYING!"
+    else
+        lowScore = tostring(saveData.lowScore)
     end
     love.graphics.print("BEST RUN: " .. lowScore, textAnchor.x, textAnchor.y, 0, textScale, textScale)
 end
