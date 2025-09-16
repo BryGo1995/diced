@@ -124,6 +124,7 @@ function GameLoop:draw()
     local textY = love.graphics.getHeight()*0.91
     local scoreDisplay = "SCORE: "..self.score
     love.graphics.print(scoreDisplay, textX, textY, 0, self.scoreScale, self.scoreScale)
+
     local textX2 = fonts.default:getWidth(scoreDisplay)*self.scoreScale
     if self.anyDiceSelected and self.projectedScore > 0 then
         love.graphics.print("+"..self.projectedScore, textX + textX2, textY, 0, self.scoreScale, self.scoreScale)
