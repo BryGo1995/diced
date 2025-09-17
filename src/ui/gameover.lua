@@ -49,6 +49,8 @@ function GameOver:initializeButtons()
             playButtonHeight,
             {
                 backgroundColor = {love.math.colorFromBytes(43, 184, 177)},
+                borderColor = {0, 0, 0},
+                borderWidth = 3,
                 font = self.defaultFont,
                 textScaler = scaler,
                 onClick = function()
@@ -65,6 +67,8 @@ function GameOver:initializeButtons()
             menuButtonHeight,
             {
                 backgroundColor = {love.math.colorFromBytes(43, 184, 177)},
+                borderColor = {0, 0, 0},
+                borderWidth = 3,
                 font = self.defaultFont,
                 textScaler = scaler,
                 onClick = function()

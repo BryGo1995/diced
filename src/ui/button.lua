@@ -15,6 +15,7 @@ function Button.new(text, x, y, width, height, options)
     self.options = options or {}
     self.backgroundColor = self.options.backgroundColor or {0.7, 0.7, 0.7}
     self.borderColor = self.options.borderColor or {0.3, 0.3, 0.3}
+    self.borderWidth = self.options.borderWidth or 1
     self.textColor = self.options.textColor or {1, 1, 1}
     self.textScaler = self.options.textScaler or 1
     self.font = self.options.font or love.graphics.getFont()
@@ -49,7 +50,9 @@ function Button:draw()
 
     -- Draw button border
     love.graphics.setColor(self.borderColor)
+    love.graphics.setLineWidth(self.borderWidth)
     love.graphics.rectangle("line", self.x, self.y, self.width, self.height)
+    love.graphics.setLineWidth(1)
 
     -- Draw button text
     love.graphics.setColor(self.textColor)

@@ -36,6 +36,8 @@ function Menu:initializeButtons()
             buttonHeight,
             {
                 backgroundColor = {love.math.colorFromBytes(43, 184, 177)},
+                borderColor = {0, 0, 0},
+                borderWidth = 3,
                 font = fonts.default,
                 textScaler = 7,
                 onClick = function()
@@ -52,6 +54,8 @@ function Menu:initializeButtons()
             buttonHeight,
             {
                 backgroundColor = {love.math.colorFromBytes(43, 184, 177)},
+                borderColor = {0, 0, 0},
+                borderWidth = 3,
                 font = fonts.default,
                 textScaler = 7,
                 onClick = function()
