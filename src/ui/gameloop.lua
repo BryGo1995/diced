@@ -178,6 +178,7 @@ function GameLoop:randomizeDicePositions()
         dicePositions[i] = i
     end
 
+    math.randomseed(os.time())
     for i = 1, self.numOfDice do
         local randomIndex = math.random(1, #dicePositions)
         local temp = dicePositions[i]
