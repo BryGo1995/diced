@@ -16,7 +16,7 @@ function love.load()
     menu:init()
 
     -- Initialize the game loop module
-    gameLoop = GameLoop.new(7, 6, 5, 2)
+    gameLoop = GameLoop.new(7, 6, 4, 2, 1)
     gameLoop:init()
 
     -- Initialize the game over screen module

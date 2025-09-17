@@ -13,7 +13,7 @@ local buttons = {}
 local buttonWidth = 200
 local buttonHeight = 60
 
-function GameLoop.new(numOfSixSidedDice, numOfEightSidedDice, numOfTenSidedDice, numOfTwelveSidedDice)
+function GameLoop.new(numOfSixSidedDice, numOfEightSidedDice, numOfTenSidedDice, numOfTwelveSidedDice, numOfTwentySidedDice)
     local self = setmetatable({}, GameLoop)
     self.score = 0
     self.scoreScale = 5
@@ -24,7 +24,8 @@ function GameLoop.new(numOfSixSidedDice, numOfEightSidedDice, numOfTenSidedDice,
     self.numOfEightSidedDice = numOfEightSidedDice
     self.numOfTenSidedDice = numOfTenSidedDice
     self.numOfTwelveSidedDice = numOfTwelveSidedDice
-    self.numOfDice = numOfSixSidedDice + numOfEightSidedDice + numOfTenSidedDice + numOfTwelveSidedDice
+    self.numOfTwentySidedDice = numOfTwentySidedDice
+    self.numOfDice = numOfSixSidedDice + numOfEightSidedDice + numOfTenSidedDice + numOfTwelveSidedDice + numOfTwentySidedDice
 
     return self
 end
@@ -86,6 +87,12 @@ function GameLoop:init()
 
     for index = self.numOfSixSidedDice + self.numOfEightSidedDice + self.numOfTenSidedDice + 1, self.numOfDice do
         self.dice[index] = Dice.new(12)
+        self.dice[index]:init(pos[randomDicePositions[index]])
+        self.dice[index]:roll()
+    end
+
+    for index = self.numOfSixSidedDice + self.numOfEightSidedDice + self.numOfTenSidedDice + self.numOfTwelveSidedDice + 1, self.numOfDice do
+        self.dice[index] = Dice.new(20)
         self.dice[index]:init(pos[randomDicePositions[index]])
         self.dice[index]:roll()
     end

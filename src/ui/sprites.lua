@@ -38,4 +38,6 @@ sprites.d10_blank = love.graphics.newImage("assets/sprites/d10-gr/D10-0.png")
 
 sprites.d12_blank = love.graphics.newImage("assets/sprites/d12-r/D12-0.png")
 
+sprites.d20_blank = love.graphics.newImage("assets/sprites/d20-purple/D20-0.png")
+
 return sprites
