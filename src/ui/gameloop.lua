@@ -33,12 +33,12 @@ end
 function GameLoop:initializeButtons()
     buttons = {
         Button.new(
-            "ROLL",
             love.graphics.getWidth()/2 - buttonWidth/2,
             love.graphics.getHeight()*0.9,
             buttonWidth,
             buttonHeight,
             {
+                text = "ROLL",
                 backgroundColor = {love.math.colorFromBytes(43, 184, 177)},
                 borderColor = {0, 0, 0},
                 borderWidth = 3,

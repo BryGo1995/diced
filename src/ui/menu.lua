@@ -29,12 +29,12 @@ function Menu:initializeButtons()
     -- Start Button
     buttons = {
         Button.new(
-            "START",
             love.graphics.getWidth()/2 - buttonWidth/2,
             love.graphics.getHeight()*0.7,
             buttonWidth,
             buttonHeight,
             {
+                text = "START",
                 backgroundColor = {love.math.colorFromBytes(43, 184, 177)},
                 borderColor = {0, 0, 0},
                 borderWidth = 3,
@@ -47,12 +47,12 @@ function Menu:initializeButtons()
             } 
         ),
         Button.new(
-            "STATS",
             love.graphics.getWidth()/2 - buttonWidth/2,
             love.graphics.getHeight()*0.8,
             buttonWidth,
             buttonHeight,
             {
+                text = "STATS",
                 backgroundColor = {love.math.colorFromBytes(43, 184, 177)},
                 borderColor = {0, 0, 0},
                 borderWidth = 3,

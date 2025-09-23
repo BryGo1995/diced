@@ -42,12 +42,12 @@ function GameOver:initializeButtons()
     -- Play again button
     buttons = {
         Button.new(
-            "PLAY AGAIN",
             love.graphics.getWidth()/2 - playButtonWidth/2,
             love.graphics.getHeight()*0.6,
             playButtonWidth,
             playButtonHeight,
             {
+                text = "PLAY AGAIN",
                 backgroundColor = {love.math.colorFromBytes(43, 184, 177)},
                 borderColor = {0, 0, 0},
                 borderWidth = 3,
@@ -60,12 +60,12 @@ function GameOver:initializeButtons()
             }
         ),
         Button.new(
-            "MENU",
             love.graphics.getWidth()/2 - buttonWidth/2,
             love.graphics.getHeight()*0.7,
             menuButtonWidth,
             menuButtonHeight,
             {
+                text = "MENU",
                 backgroundColor = {love.math.colorFromBytes(43, 184, 177)},
                 borderColor = {0, 0, 0},
                 borderWidth = 3,

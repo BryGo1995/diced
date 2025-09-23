@@ -1,11 +1,10 @@
 local Button = {}
 Button.__index = Button
 
-function Button.new(text, x, y, width, height, options)
+function Button.new(x, y, width, height, options)
     local self = setmetatable({}, Button)
 
     -- Required properties
-    self.text = text
     self.x = x
     self.y = y
     self.width = width
@@ -13,6 +12,7 @@ function Button.new(text, x, y, width, height, options)
 
     -- Optional properties
     self.options = options or {}
+    self.text = self.options.text or "BUTTON"
     self.backgroundColor = self.options.backgroundColor or {0.7, 0.7, 0.7}
     self.borderColor = self.options.borderColor or {0.3, 0.3, 0.3}
     self.borderWidth = self.options.borderWidth or 1
@@ -59,7 +59,7 @@ function Button:draw()
     love.graphics.setFont(self.font)
     local textX = self.x + self.width/2 - self.font:getWidth(self.text)*self.textScaler/2
     local textY = self.y + self.height/2 - self.font:getHeight(self.text)*self.textScaler/2
-    love.graphics.print(self.text, textX, textY, 0, self.textScaler, self.textScaler)
+    love.graphics.print(self.options.text, textX, textY, 0, self.textScaler, self.textScaler)
 
     -- Reset color
     love.graphics.setColor(1, 1, 1)
