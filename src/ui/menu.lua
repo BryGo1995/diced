@@ -8,6 +8,7 @@ local fonts = require("src/ui/fonts")
 local buttons = {}
 local buttonWidth = 300
 local buttonHeight = 70
+local globalScaler = 3.6
 
 function Menu.new()
     local self = setmetatable({}, Menu)
@@ -29,12 +30,12 @@ function Menu:initializeButtons()
     -- Start Button
     buttons = {
         Button.new(
-            love.graphics.getWidth()/2 - buttonWidth/2,
-            love.graphics.getHeight()*0.7,
-            buttonWidth,
-            buttonHeight,
+            love.graphics.getWidth()/2,
+            love.graphics.getHeight()*0.75,
             {
                 text = "START",
+                sprite = sprites.basicButton,
+                spriteScaler = globalScaler,
                 backgroundColor = {love.math.colorFromBytes(43, 184, 177)},
                 borderColor = {0, 0, 0},
                 borderWidth = 3,
@@ -47,12 +48,12 @@ function Menu:initializeButtons()
             } 
         ),
         Button.new(
-            love.graphics.getWidth()/2 - buttonWidth/2,
-            love.graphics.getHeight()*0.8,
-            buttonWidth,
-            buttonHeight,
+            love.graphics.getWidth()/2,
+            love.graphics.getHeight()*0.9,
             {
                 text = "STATS",
+                sprite = sprites.basicButton,
+                spriteScaler = globalScaler,
                 backgroundColor = {love.math.colorFromBytes(43, 184, 177)},
                 borderColor = {0, 0, 0},
                 borderWidth = 3,

@@ -1,18 +1,20 @@
 local Button = {}
 Button.__index = Button
 
-function Button.new(x, y, width, height, options)
+function Button.new(x, y, options)
     local self = setmetatable({}, Button)
 
     -- Required properties
     self.x = x
     self.y = y
-    self.width = width
-    self.height = height
 
     -- Optional properties
     self.options = options or {}
     self.text = self.options.text or "BUTTON"
+    self.sprite = self.options.sprite or nil
+    self.spriteScaler = self.options.spriteScaler or 1
+    self.width = self.options.width or self.sprite:getWidth()*self.spriteScaler or nil
+    self.height = self.options.height or self.sprite:getHeight()*self.spriteScaler or nil
     self.backgroundColor = self.options.backgroundColor or {0.7, 0.7, 0.7}
     self.borderColor = self.options.borderColor or {0.3, 0.3, 0.3}
     self.borderWidth = self.options.borderWidth or 1
@@ -26,8 +28,10 @@ function Button.new(x, y, width, height, options)
 end
 
 function Button:isPointInside(x, y)
-    return x >= self.x and x <= self.x + self.width and
-           y >= self.y and y <= self.y + self.height
+    local hitboxX = self.x - self.width/2
+    local hitboxY = self.y - self.height/2
+    return x >= hitboxX and x <= hitboxX + self.width and
+           y >= hitboxY and y <= hitboxY + self.height
 end
 
 function Button:isHovered(x, y)
@@ -39,26 +43,40 @@ function Button:update(dt)
 end
 
 function Button:draw()
-    -- Draw button background
-    self:isHovered(love.mouse.getPosition())
-    if self.hovered then 
-        love.graphics.setColor({0.7, 0.7, 0.7})
-    else
-        love.graphics.setColor(self.backgroundColor)
-    end
-    love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
+    if self.sprite == nil then
+        -- Draw button background
+        self:isHovered(love.mouse.getPosition())
+        if self.hovered then 
+            love.graphics.setColor({0.7, 0.7, 0.7})
+        else
+            love.graphics.setColor(self.backgroundColor)
+        end
 
-    -- Draw button border
-    love.graphics.setColor(self.borderColor)
-    love.graphics.setLineWidth(self.borderWidth)
-    love.graphics.rectangle("line", self.x, self.y, self.width, self.height)
-    love.graphics.setLineWidth(1)
+        -- Draw filled rectangle
+        local rectangleX = self.x - self.width/2
+        local rectangleY = self.y - self.height/2
+        love.graphics.rectangle("fill", rectangleX, rectangleY, self.width, self.height)
+
+        -- Draw button border
+        love.graphics.setColor(self.borderColor)
+        love.graphics.setLineWidth(self.borderWidth)
+        love.graphics.rectangle("line", rectangleX, rectangleY, self.width, self.height)
+        love.graphics.setLineWidth(1)
+        love.graphics.setColor(1, 1, 1)
+    end
+
+    -- Draw button sprite if available
+    if(self.options.sprite ~= nil) then
+        local spriteX = self.x - self.width/2
+        local spriteY = self.y - self.height/2
+        love.graphics.draw(self.options.sprite, spriteX, spriteY, 0, self.spriteScaler, self.spriteScaler)
+    end
 
     -- Draw button text
     love.graphics.setColor(self.textColor)
     love.graphics.setFont(self.font)
-    local textX = self.x + self.width/2 - self.font:getWidth(self.text)*self.textScaler/2
-    local textY = self.y + self.height/2 - self.font:getHeight(self.text)*self.textScaler/2
+    local textX = self.x - self.font:getWidth(self.text)*self.textScaler/2
+    local textY = self.y - self.font:getHeight(self.text)*self.textScaler/2
     love.graphics.print(self.options.text, textX, textY, 0, self.textScaler, self.textScaler)
 
     -- Reset color
