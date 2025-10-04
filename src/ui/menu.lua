@@ -6,8 +6,6 @@ local sprites = require("src/ui/sprites")
 local fonts = require("src/ui/fonts")
 
 local buttons = {}
-local buttonWidth = 300
-local buttonHeight = 70
 local globalScaler = 3.6
 
 function Menu.new()
