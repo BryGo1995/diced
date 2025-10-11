@@ -39,13 +39,12 @@ function Button:isHovered(x, y)
 end
 
 function Button:update(dt)
-
+    self:isHovered(love.mouse.getPosition())
 end
 
 function Button:draw()
     if self.sprite == nil then
         -- Draw button background
-        self:isHovered(love.mouse.getPosition())
         if self.hovered then 
             love.graphics.setColor({0.7, 0.7, 0.7})
         else
@@ -66,10 +65,10 @@ function Button:draw()
     end
 
     -- Draw button sprite if available
-    if(self.options.sprite ~= nil) then
+    if(self.sprite ~= nil) then
         local spriteX = self.x - self.width/2
         local spriteY = self.y - self.height/2
-        love.graphics.draw(self.options.sprite, spriteX, spriteY, 0, self.spriteScaler, self.spriteScaler)
+        love.graphics.draw(self.sprite, spriteX, spriteY, 0, self.spriteScaler, self.spriteScaler)
     end
 
     -- Draw button text
@@ -77,7 +76,7 @@ function Button:draw()
     love.graphics.setFont(self.font)
     local textX = self.x - self.font:getWidth(self.text)*self.textScaler/2
     local textY = self.y - self.font:getHeight(self.text)*self.textScaler/2
-    love.graphics.print(self.options.text, textX, textY, 0, self.textScaler, self.textScaler)
+    love.graphics.print(self.text, textX, textY, 0, self.textScaler, self.textScaler)
 
     -- Reset color
     love.graphics.setColor(1, 1, 1)

@@ -25,9 +25,14 @@ function love.load()
 end
 
 function love.update(dt)
-    menu:update(dt)
-    gameLoop:update(dt)
-    gameOver:update(dt)
+    local currentState = gameState:getState()
+    if currentState == states.MAIN_MENU then
+        menu:update(dt)
+    elseif currentState == states.GAME_LOOP then
+        gameLoop:update(dt)
+    elseif currentState == states.GAME_OVER then
+        gameOver:update(dt)
+    end
 end
 
 function love.draw()
