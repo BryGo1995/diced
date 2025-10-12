@@ -1,12 +1,14 @@
 local Menu = {}
 Menu.__index = Menu
 
+local Stats = require("src/ui/stats")
 local Button = require("src/ui/button")
 local sprites = require("src/ui/sprites")
 local fonts = require("src/ui/fonts")
 
 local buttons = {}
 local globalScaler = 3.6
+--local statsModule = Stats.new()
 
 function Menu.new()
     local self = setmetatable({}, Menu)
@@ -18,6 +20,7 @@ function Menu.new()
         sprite = sprites.title,
         scale = 3.6
     }
+    self.statsModule = Stats.new()
     self.displayStats = false
     self.exit = false
 
@@ -68,6 +71,7 @@ end
 
 function Menu:init()
     self:initializeButtons()
+    self.statsModule:init()
 end
 
 function Menu:update(dt)
@@ -89,7 +93,7 @@ function Menu:draw()
     end
 
     if self.displayStats then
-        self.displayGameStats()
+        self:displayGameStats()
     end
 
 end
@@ -103,16 +107,6 @@ function Menu:onClick(x, y)
 end
 
 function Menu:displayGameStats()
-    love.graphics.setColor(0.5, 0.5, 0.5)
-    local moduleWidth = love.graphics.getWidth()*0.5
-    local moduleHeight = love.graphics.getHeight()*0.5
-    local moduleX = love.graphics.getWidth()/2 - moduleWidth/2
-    local moduleY = love.graphics.getHeight()/2 - moduleHeight/2
-    love.graphics.rectangle("fill", moduleX, moduleY, moduleWidth, moduleHeight)
-    love.graphics.setColor(1, 1, 1)
-
-    local textAnchor = {x = moduleX + 30, y = moduleY + 30}
-    local textScale = 2
     local SaveManager = require("src/save_manager")
     local saveManager = SaveManager.new()
     
@@ -123,7 +117,8 @@ function Menu:displayGameStats()
     else
         lowScore = tostring(saveData.lowScore)
     end
-    love.graphics.print("BEST RUN: " .. lowScore, textAnchor.x, textAnchor.y, 0, textScale, textScale)
+    self.statsModule:displayStats()
+    love.graphics.print("BEST RUN: " .. lowScore, self.statsModule.text.x, self.statsModule.text.y, 0, self.statsModule.text.scale, self.statsModule.text.scale)
 end
 
 function Menu:getExitStatus()
