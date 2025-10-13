@@ -4,6 +4,10 @@ love.graphics.setDefaultFilter("nearest", "nearest")
 
 sprites.title = love.graphics.newImage("assets/sprites/Diced-transparent.png")
 
+sprites.statsWindow = love.graphics.newImage("assets/sprites/menu/StatsModule.png")
+sprites.statsWindowHanging = love.graphics.newImage("assets/sprites/menu/StatsModule-Hanging.png")
+sprites.exitIconSprite = love.graphics.newImage("assets/sprites/menu/X-Button-White.png")
+
 sprites.startButton = love.graphics.newImage("assets/sprites/menu/Start-Tan.png")
 sprites.basicButton = love.graphics.newImage("assets/sprites/menu/Basic-Button-Short.png")
 
