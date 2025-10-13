@@ -99,10 +99,14 @@ function Menu:draw()
 end
 
 function Menu:onClick(x, y)
-    for _, b in ipairs(buttons) do
-        if b:isPointInside(x, y) then
-            b:onClick()
+    if self.displayStats == false then
+        for _, b in ipairs(buttons) do
+            if b:isPointInside(x, y) then
+                b:onClick()
+            end
         end
+    else
+        self.statsModule:onClick(x, y)
     end
 end
 
@@ -117,8 +121,13 @@ function Menu:displayGameStats()
     else
         lowScore = tostring(saveData.lowScore)
     end
+
     self.statsModule:displayStats()
+
+    love.graphics.setColor(0.0, 0.5, 0.5)
+    love.graphics.setFont(fonts.default)
     love.graphics.print("BEST RUN: " .. lowScore, self.statsModule.text.x, self.statsModule.text.y, 0, self.statsModule.text.scale, self.statsModule.text.scale)
+    love.graphics.setColor(1, 1, 1)
 end
 
 function Menu:getExitStatus()

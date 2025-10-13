@@ -1,14 +1,15 @@
 local Stats = {}
 Stats.__index = Stats
 
-local sprites = require("src/ui/sprites")
+local Sprites = require("src/ui/sprites")
+local Button = require("src/ui/button")
 
 function Stats.new()
     local self = setmetatable({}, Stats)
 
     -- Initialize with default values, will be updated later
     self.window = {
-        sprite = sprites.statsWindowHanging,
+        sprite = Sprites.statsWindowHanging,
         scale = 3.6,
         x = 100,
         y = 100,
@@ -16,13 +17,14 @@ function Stats.new()
         height = 300
     }
     self.exitIcon = {
-        sprite = sprites.exitIconSprite,
+        sprite = Sprites.exitIconSprite,
         scale = 3.6,
         x = 100,
         y = 100,
         color = {1, 1, 1},
         hoveredColor = {0.5, 0.5, 0.5}
     }
+    self.buttons = {}
 
     return self
 end
@@ -36,20 +38,53 @@ function Stats:init()
 
     self.exitIcon.x = self.window.x + self.window.width + 20
     self.exitIcon.y = self.window.y + 225
-    
+
     self.text = {
         x = self.window.x + 50,
         y = self.window.y + 225,
         scale = 3
     }
+
+    self:initializeButtons()
+end
+
+function Stats:update()
+
+end
+
+function Stats:onClick(x, y)
+    for _, b in ipairs(self.buttons) do
+        if b:isPointInside(x, y) then
+            b:onClick()
+        end
+    end
 end
 
 function Stats:displayStats()
     love.graphics.setBackgroundColor(0, 0, 0)
     love.graphics.draw(self.window.sprite, self.window.x, self.window.y, 0, self.window.scale, self.window.scale)
     love.graphics.setColor(0.5, 0.5, 0.5)
-    love.graphics.draw(self.exitIcon.sprite, self.exitIcon.x, self.exitIcon.y, 0, self.exitIcon.scale, self.exitIcon.scale)
+    for _, b in ipairs(self.buttons) do
+        b:draw()
+    end
     love.graphics.setColor(1, 1, 1)
+end
+
+function Stats:initializeButtons()
+    self.buttons = {
+        Button.new(
+            self.window.x + self.window.width + 48,
+            self.window.y + 250,
+            {
+                text = "",
+                sprite = Sprites.exitIconSprite,
+                spriteScaler = 3.6,
+                onClick = function()
+                    print("Exit button clicked")
+                end
+            }
+        )
+    }
 end
 
 return Stats
