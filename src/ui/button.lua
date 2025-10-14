@@ -12,6 +12,7 @@ function Button.new(x, y, options)
     self.options = options or {}
     self.text = self.options.text or "BUTTON"
     self.sprite = self.options.sprite or nil
+    self.hoveredSprite = self.options.hoveredSprite or nil
     self.spriteScaler = self.options.spriteScaler or 1
     self.width = self.options.width or self.sprite:getWidth()*self.spriteScaler or nil
     self.height = self.options.height or self.sprite:getHeight()*self.spriteScaler or nil
@@ -22,6 +23,8 @@ function Button.new(x, y, options)
     self.textScaler = self.options.textScaler or 1
     self.font = self.options.font or love.graphics.getFont()
     self.onClick = self.options.onClick or function() end
+
+    self.currentSprite = self.sprite
     self.hovered = false
     
     return self
@@ -66,9 +69,15 @@ function Button:draw()
 
     -- Draw button sprite if available
     if(self.sprite ~= nil) then
+        if self.hovered and self.hoveredSprite ~= nil then
+            self.currentSprite = self.hoveredSprite
+        else
+            self.currentSprite = self.sprite
+        end
+
         local spriteX = self.x - self.width/2
         local spriteY = self.y - self.height/2
-        love.graphics.draw(self.sprite, spriteX, spriteY, 0, self.spriteScaler, self.spriteScaler)
+        love.graphics.draw(self.currentSprite, spriteX, spriteY, 0, self.spriteScaler, self.spriteScaler)
     end
 
     -- Draw button text

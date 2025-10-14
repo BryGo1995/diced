@@ -74,8 +74,12 @@ function Menu:init()
 end
 
 function Menu:update(dt)
-    for _, b in ipairs(buttons) do
-        b:update(dt)
+    if self.statsModule.active == false then
+        for _, b in ipairs(buttons) do
+            b:update(dt)
+        end
+    else
+        self.statsModule:update(dt)
     end
 end
 
@@ -92,7 +96,7 @@ function Menu:draw()
     end
 
     if self.statsModule.active then
-        love.graphics.setColor(0.5, 0.5, 0.5, 0.5)
+        love.graphics.setColor(0.5, 0.5, 0.5, 0.8)
         love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
         love.graphics.setColor(1, 1, 1)
         self.statsModule:draw()

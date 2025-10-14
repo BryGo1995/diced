@@ -43,7 +43,9 @@ function Stats:init()
 end
 
 function Stats:update()
-
+    for _, b in ipairs(self.buttons) do
+        b:update(dt)
+    end
 end
 
 function Stats:draw()
@@ -102,6 +104,7 @@ function Stats:initializeButtons()
             {
                 text = "",
                 sprite = Sprites.exitIconSprite,
+                hoveredSprite = Sprites.exitIconSpriteHovered,
                 spriteScaler = 3.6,
                 onClick = function()
                     print("Exit button clicked")
