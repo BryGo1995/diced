@@ -17,7 +17,7 @@ function Menu.new()
         x = love.graphics.getWidth()/2,
         y = love.graphics.getHeight()*0.6,
         sprite = sprites.title,
-        scale = 3.6
+        scale = globalScaler
     }
     self.statsModule = Stats.new()
     self.displayStats = false
@@ -40,7 +40,7 @@ function Menu:initializeButtons()
                 borderColor = {0, 0, 0},
                 borderWidth = 3,
                 font = fonts.default,
-                textScaler = 7,
+                textScaler = globalScaler*2,
                 onClick = function()
                     print("Start Button clicked")
                     self.exit = true
@@ -58,7 +58,7 @@ function Menu:initializeButtons()
                 borderColor = {0, 0, 0},
                 borderWidth = 3,
                 font = fonts.default,
-                textScaler = 7,
+                textScaler = globalScaler*2,
                 onClick = function()
                     print("Stats Button Clicked")
                     self.statsModule.active = true
