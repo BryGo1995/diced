@@ -8,7 +8,6 @@ local fonts = require("src/ui/fonts")
 
 local buttons = {}
 local globalScaler = 3.6
---local statsModule = Stats.new()
 
 function Menu.new()
     local self = setmetatable({}, Menu)
@@ -62,7 +61,7 @@ function Menu:initializeButtons()
                 textScaler = 7,
                 onClick = function()
                     print("Stats Button Clicked")
-                    self.displayStats = not self.displayStats
+                    self.statsModule.active = true
                 end
             }
         )
@@ -92,14 +91,14 @@ function Menu:draw()
         b:draw()
     end
 
-    if self.displayStats then
-        self:displayGameStats()
+    if self.statsModule.active then
+        self.statsModule:draw()
     end
 
 end
 
 function Menu:onClick(x, y)
-    if self.displayStats == false then
+    if self.statsModule.active == false then
         for _, b in ipairs(buttons) do
             if b:isPointInside(x, y) then
                 b:onClick()
@@ -108,26 +107,6 @@ function Menu:onClick(x, y)
     else
         self.statsModule:onClick(x, y)
     end
-end
-
-function Menu:displayGameStats()
-    local SaveManager = require("src/save_manager")
-    local saveManager = SaveManager.new()
-    
-    local saveData, error = saveManager:loadData()
-    local lowScore
-    if not saveData or not saveData.lowScore then
-        lowScore = "GET TO PLAYING!"
-    else
-        lowScore = tostring(saveData.lowScore)
-    end
-
-    self.statsModule:displayStats()
-
-    love.graphics.setColor(0.0, 0.5, 0.5)
-    love.graphics.setFont(fonts.default)
-    love.graphics.print("BEST RUN: " .. lowScore, self.statsModule.text.x, self.statsModule.text.y, 0, self.statsModule.text.scale, self.statsModule.text.scale)
-    love.graphics.setColor(1, 1, 1)
 end
 
 function Menu:getExitStatus()
