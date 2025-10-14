@@ -92,6 +92,9 @@ function Menu:draw()
     end
 
     if self.statsModule.active then
+        love.graphics.setColor(0.5, 0.5, 0.5, 0.5)
+        love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
+        love.graphics.setColor(1, 1, 1)
         self.statsModule:draw()
     end
 
