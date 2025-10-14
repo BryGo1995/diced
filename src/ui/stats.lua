@@ -27,10 +27,10 @@ end
 function Stats:init()
     self.saveManager = SaveManager.new()
 
-    self.window.width = love.graphics.getWidth()*0.5
-    self.window.height = love.graphics.getHeight()*0.5
-    self.window.x = love.graphics.getWidth()/2 - self.window.sprite:getWidth()*self.window.scale/2
-    self.window.y = love.graphics.getHeight()/2 - self.window.sprite:getHeight()*self.window.scale/2
+    self.window.width = self.window.sprite:getWidth()*self.window.scale
+    self.window.height = self.window.sprite:getHeight()*self.window.scale
+    self.window.x = love.graphics.getWidth()/2 - self.window.width/2
+    self.window.y = love.graphics.getHeight()/2 - self.window.height/2
 
     self.text = {
         x = self.window.x + 50,
@@ -99,7 +99,7 @@ end
 function Stats:initializeButtons()
     self.buttons = {
         Button.new(
-            self.window.x + self.window.width + 48,
+            self.window.x + self.window.width - 70,
             self.window.y + 250,
             {
                 text = "",
