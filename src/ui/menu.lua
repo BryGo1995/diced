@@ -3,7 +3,7 @@ Menu.__index = Menu
 
 local Stats = require("src/ui/stats")
 local Button = require("src/ui/button")
-local sprites = require("src/ui/sprites")
+local Sprites = require("src/ui/sprites")
 local fonts = require("src/ui/fonts")
 
 local buttons = {}
@@ -16,7 +16,7 @@ function Menu.new()
         font = love.graphics.newFont(144),
         x = love.graphics.getWidth()/2,
         y = love.graphics.getHeight()*0.6,
-        sprite = sprites.title,
+        sprite = Sprites.title,
         scale = globalScaler
     }
     self.statsModule = Stats.new()
@@ -34,7 +34,7 @@ function Menu:initializeButtons()
             love.graphics.getHeight()*0.75,
             {
                 text = "START",
-                sprite = sprites.basicButton,
+                sprite = Sprites.basicButton,
                 spriteScaler = globalScaler,
                 font = fonts.default,
                 textScaler = globalScaler*2,
@@ -49,7 +49,7 @@ function Menu:initializeButtons()
             love.graphics.getHeight()*0.9,
             {
                 text = "STATS",
-                sprite = sprites.basicButton,
+                sprite = Sprites.basicButton,
                 spriteScaler = globalScaler,
                 font = fonts.default,
                 textScaler = globalScaler*2,
