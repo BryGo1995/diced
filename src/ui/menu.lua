@@ -36,9 +36,6 @@ function Menu:initializeButtons()
                 text = "START",
                 sprite = sprites.basicButton,
                 spriteScaler = globalScaler,
-                backgroundColor = {love.math.colorFromBytes(43, 184, 177)},
-                borderColor = {0, 0, 0},
-                borderWidth = 3,
                 font = fonts.default,
                 textScaler = globalScaler*2,
                 onClick = function()
@@ -54,9 +51,6 @@ function Menu:initializeButtons()
                 text = "STATS",
                 sprite = sprites.basicButton,
                 spriteScaler = globalScaler,
-                backgroundColor = {love.math.colorFromBytes(43, 184, 177)},
-                borderColor = {0, 0, 0},
-                borderWidth = 3,
                 font = fonts.default,
                 textScaler = globalScaler*2,
                 onClick = function()
