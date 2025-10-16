@@ -3,6 +3,7 @@ GameLoop.__index = GameLoop
 
 local Dice = require("src/ui/dice")
 local Button = require("src/ui/button")
+local Sprites = require("src/ui/sprites")
 local fonts = require("src/ui/fonts")
 
 gameWindow = {height = 800, width = 1000}
@@ -37,11 +38,8 @@ function GameLoop:initializeButtons()
             love.graphics.getHeight()*0.935,
             {
                 text = "ROLL",
-                width = buttonWidth,
-                height = buttonHeight,
-                backgroundColor = {love.math.colorFromBytes(43, 184, 177)},
-                borderColor = {0, 0, 0},
-                borderWidth = 3,
+                sprite = Sprites.basicButtonShort,
+                spriteScaler = 3.6,
                 font = fonts.default,
                 textScaler = 5,
                 onClick = function()

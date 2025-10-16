@@ -11,6 +11,7 @@ sprites.exitIconSpriteHovered = love.graphics.newImage("assets/sprites/menu/X-Bu
 
 sprites.startButton = love.graphics.newImage("assets/sprites/menu/Start-Tan.png")
 sprites.basicButton = love.graphics.newImage("assets/sprites/menu/Basic-Button-Short.png")
+sprites.basicButtonShort = love.graphics.newImage("assets/sprites/menu/Basic-Button-Short-Narrow.png")
 
 sprites.d6_1 = love.graphics.newImage("assets/sprites/d6-w/D6-1.png")
 sprites.d6_2 = love.graphics.newImage("assets/sprites/d6-w/D6-2.png")
