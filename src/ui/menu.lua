@@ -4,7 +4,7 @@ Menu.__index = Menu
 local Stats = require("src/ui/stats")
 local Button = require("src/ui/button")
 local Sprites = require("src/ui/sprites")
-local fonts = require("src/ui/fonts")
+local Fonts = require("src/ui/fonts")
 
 local buttons = {}
 local globalScaler = 3.6
@@ -36,7 +36,7 @@ function Menu:initializeButtons()
                 text = "START",
                 sprite = Sprites.basicButton,
                 spriteScaler = globalScaler,
-                font = fonts.default,
+                font = Fonts.default,
                 textScaler = globalScaler*2,
                 onClick = function()
                     print("Start Button clicked")
@@ -51,7 +51,7 @@ function Menu:initializeButtons()
                 text = "STATS",
                 sprite = Sprites.basicButton,
                 spriteScaler = globalScaler,
-                font = fonts.default,
+                font = Fonts.default,
                 textScaler = globalScaler*2,
                 onClick = function()
                     print("Stats Button Clicked")
