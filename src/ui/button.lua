@@ -10,6 +10,7 @@ function Button.new(x, y, options)
 
     -- Optional properties
     self.options = options or {}
+    self.active = self.options.active or true
     self.text = self.options.text or "BUTTON"
     self.sprite = self.options.sprite or nil
     self.hoveredSprite = self.options.hoveredSprite or nil

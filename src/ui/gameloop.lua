@@ -38,6 +38,7 @@ function GameLoop:initializeButtons()
             love.graphics.getHeight()*0.935,
             {
                 text = "ROLL",
+                active = false,
                 sprite = Sprites.basicButtonShort,
                 spriteScaler = 3.6,
                 font = fonts.default,
@@ -151,10 +152,11 @@ function GameLoop:draw()
     end
 end
 
-function GameLoop:isButtonActive()
+function GameLoop:isRollButtonActive()
+    buttons[1].active = false
     for i = 1, self.numOfDice do
         if self.dice[i].selected then
-            return true 
+            buttons[1].active = true
         end
     end
 end
@@ -164,12 +166,11 @@ function GameLoop:onClick(x, y)
         self.dice[i]:onClick(x, y)
     end
 
-    if self:isButtonActive() then
-        for _, b in ipairs(buttons) do
-            if b:isPointInside(x, y) then
-                b:onClick()
-            end
-        end 
+    self:isRollButtonActive()
+    for _, b in ipairs(buttons) do
+        if b.active and b:isPointInside(x, y) then
+            b:onClick()
+        end
     end
 end
 
