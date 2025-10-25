@@ -3,6 +3,7 @@ GameOver.__index = GameOver
 
 local states = require("src/state").states
 local Button = require("src/ui/button")
+local Sprites = require("src/ui/sprites")
 local fonts = require("src/ui/fonts")
 
 local buttons = {}
@@ -43,14 +44,11 @@ function GameOver:initializeButtons()
     buttons = {
         Button.new(
             love.graphics.getWidth()/2,
-            love.graphics.getHeight()*0.6,
+            love.graphics.getHeight()*0.75,
             {
                 text = "PLAY AGAIN",
-                width = playButtonWidth,
-                height = playButtonHeight,
-                backgroundColor = {love.math.colorFromBytes(43, 184, 177)},
-                borderColor = {0, 0, 0},
-                borderWidth = 3,
+                sprite = Sprites.basicButton,
+                spriteScaler = 3.6,
                 font = self.defaultFont,
                 textScaler = scaler,
                 onClick = function()
@@ -61,16 +59,13 @@ function GameOver:initializeButtons()
         ),
         Button.new(
             love.graphics.getWidth()/2,
-            love.graphics.getHeight()*0.7,
+            love.graphics.getHeight()*0.9,
             {
                 text = "MENU",
-                width = menuButtonWidth,
-                height = menuButtonHeight,
-                backgroundColor = {love.math.colorFromBytes(43, 184, 177)},
-                borderColor = {0, 0, 0},
-                borderWidth = 3,
+                sprite = Sprites.basicButton,
+                spriteScaler = 3.6,
                 font = self.defaultFont,
-                textScaler = scaler,
+                textScaler = 7.2,
                 onClick = function()
                     self.nextState = states.MAIN_MENU
                     self.scoreDisplay.score = 0
