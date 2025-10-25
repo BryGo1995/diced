@@ -55,6 +55,19 @@ function GameLoop:initializeButtons()
                     end 
                 end
             }
+        ),
+        Button.new(
+            love.graphics.getWidth() - 50,
+            50,
+            {
+                text = "",
+                sprite = Sprites.exitIconSprite,
+                hoveredSprite = Sprites.exitIconSpriteHovered,
+                spriteScaler = 3.6,
+                onClick = function()
+                    print("Back Button clicked")
+                end
+            }
         )
     }
 end
