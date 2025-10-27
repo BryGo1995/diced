@@ -76,9 +76,14 @@ function Button:draw()
             self.currentSprite = self.sprite
         end
 
+        if self.active == false then
+            love.graphics.setColor(0.4, 0.4, 0.4)
+        end
+
         local spriteX = self.x - self.width/2
         local spriteY = self.y - self.height/2
         love.graphics.draw(self.currentSprite, spriteX, spriteY, 0, self.spriteScaler, self.spriteScaler)
+        love.graphics.setColor(1, 1, 1)
     end
 
     -- Draw button text

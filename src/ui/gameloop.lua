@@ -193,6 +193,7 @@ function GameLoop:update(dt)
         end
     else
         for _, b in ipairs(buttons) do
+            self:isRollButtonActive()
             b:update()
         end
     end
