@@ -10,7 +10,13 @@ gameWindow = {height = 800, width = 1000}
 verticalCells = 5
 horizontalCells = 4
 
+local windowCenter = {
+    x = love.graphics.getWidth()/2,
+    y = love.graphics.getHeight()/2
+}
+
 local buttons = {}
+local exitMenuButtons = {}
 local buttonWidth = 200
 local buttonHeight = 60
 
@@ -27,6 +33,22 @@ function GameLoop.new(numOfSixSidedDice, numOfEightSidedDice, numOfTenSidedDice,
     self.numOfTwelveSidedDice = numOfTwelveSidedDice
     self.numOfTwentySidedDice = numOfTwentySidedDice
     self.numOfDice = numOfSixSidedDice + numOfEightSidedDice + numOfTenSidedDice + numOfTwelveSidedDice + numOfTwentySidedDice
+
+    self.displayExitMenu = false
+    self.returnToMenu = false
+    self.exitWindow = {
+        sprite = Sprites.statsWindow,
+        scale = 3,
+        x = 0,
+        y = 0,
+        text = {
+            message = "EXIT GAME?",
+            font = fonts.default,
+            x = windowCenter.x,
+            y = windowCenter.y,
+            scale = 7
+        }
+    }
 
     return self
 end
@@ -66,7 +88,41 @@ function GameLoop:initializeButtons()
                 hoveredSprite = Sprites.exitIconSpriteHovered,
                 spriteScaler = 3.6,
                 onClick = function()
-                    print("Back Button clicked")
+                    print("Exit Button clicked")
+                    self.displayExitMenu = true
+                end
+            }
+        )
+    }
+
+    exitMenuButtons = {
+        Button.new(
+            windowCenter.x - 125,
+            windowCenter.y + 100,
+            {
+                text = "YES",
+                sprite = Sprites.basicButtonShort,
+                spriteScaler = 3.6,
+                font = fonts.default,
+                textScaler = 5,
+                onClick = function()
+                    print("YES")
+                    self.returnToMenu = true
+                end
+            }
+        ),
+        Button.new(
+            windowCenter.x + 125,
+            windowCenter.y + 100,
+            {
+                text = "NO",
+                sprite = Sprites.basicButtonShort,
+                spriteScaler = 3.6,
+                font = fonts.default,
+                textScaler = 5,
+                onClick = function()
+                    print("NO")
+                    self.displayExitMenu = false
                 end
             }
         )
@@ -74,6 +130,8 @@ function GameLoop:initializeButtons()
 end
 
 function GameLoop:init()
+    self.returnToMenu = false
+    self.displayExitMenu = false
     self.score = 0
 
     local pos = setDicePositions(self.numOfDice)
@@ -108,7 +166,12 @@ function GameLoop:init()
         self.dice[index]:init(pos[randomDicePositions[index]])
         self.dice[index]:roll()
     end
-    
+
+    self.exitWindow.x = windowCenter.x - self.exitWindow.sprite:getWidth()*self.exitWindow.scale/2
+    self.exitWindow.y = windowCenter.y - self.exitWindow.sprite:getHeight()*self.exitWindow.scale/2
+    self.exitWindow.text.x = windowCenter.x - self.exitWindow.text.font:getWidth(self.exitWindow.text.message)*self.exitWindow.text.scale/2
+    self.exitWindow.text.y = windowCenter.y - self.exitWindow.text.font:getHeight(self.exitWindow.text.message)*self.exitWindow.text.scale/2 - 70
+
     self:initializeButtons()
 end
 
@@ -124,12 +187,26 @@ function GameLoop:update(dt)
     end
     self.projectedScore = cumulativeScore
     
-    for _, b in ipairs(buttons) do
-        b:update()
+    if self.displayExitMenu then
+        for _, b in ipairs(exitMenuButtons) do
+            b:update()
+        end
+    else
+        for _, b in ipairs(buttons) do
+            b:update()
+        end
     end
 end
 
 function GameLoop:draw()
+    if self.displayExitMenu then
+        self:drawExitMenu()
+    else
+        self:drawGameScreen()
+    end
+end
+
+function GameLoop:drawGameScreen()
     for i = 1, self.numOfDice do
         if self.dice[i].active then
             self.dice[i]:draw()
@@ -152,6 +229,17 @@ function GameLoop:draw()
     end
 end
 
+function GameLoop:drawExitMenu()
+    love.graphics.draw(self.exitWindow.sprite, self.exitWindow.x, self.exitWindow.y, 0, self.exitWindow.scale, self.exitWindow.scale)
+
+    love.graphics.setFont(self.exitWindow.text.font)
+    love.graphics.print("EXIT GAME?", self.exitWindow.text.x, self.exitWindow.text.y, 0, self.exitWindow.text.scale, self.exitWindow.text.scale)
+
+    for _, b in ipairs(exitMenuButtons) do
+        b:draw()
+    end
+end
+
 function GameLoop:isRollButtonActive()
     buttons[1].active = false
     for i = 1, self.numOfDice do
@@ -162,14 +250,23 @@ function GameLoop:isRollButtonActive()
 end
 
 function GameLoop:onClick(x, y)
-    for i = 1, self.numOfDice do
-        self.dice[i]:onClick(x, y)
-    end
 
-    self:isRollButtonActive()
-    for _, b in ipairs(buttons) do
-        if b.active and b:isPointInside(x, y) then
-            b:onClick()
+    if self.displayExitMenu then
+        for _, b in ipairs(exitMenuButtons) do
+            if b.active and b:isPointInside(x, y) then
+                b:onClick()
+            end
+        end
+    else
+        for i = 1, self.numOfDice do
+            self.dice[i]:onClick(x, y)
+        end
+
+        self:isRollButtonActive()
+        for _, b in ipairs(buttons) do
+            if b.active and b:isPointInside(x, y) then
+                b:onClick()
+            end
         end
     end
 end

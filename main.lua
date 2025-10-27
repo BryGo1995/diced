@@ -61,6 +61,9 @@ function love.mousepressed(x, y, button)
             gameState:changeState(states.GAME_OVER)
             gameOver.scoreDisplay.score = gameLoop.score
         end
+        if gameLoop.returnToMenu then
+            gameState:changeState(states.MAIN_MENU)
+        end
     elseif currentState == states.GAME_OVER then
         gameOver:writeScoreToFile()
         gameOver:onClick(x, y)
