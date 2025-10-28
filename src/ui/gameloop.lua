@@ -6,9 +6,9 @@ local Button = require("src/ui/button")
 local Sprites = require("src/ui/sprites")
 local fonts = require("src/ui/fonts")
 
-gameWindow = {height = 800, width = 1000}
-verticalCells = 5
-horizontalCells = 4
+local gameWindow = {height = 800, width = 1000}
+local verticalCells = 5
+local horizontalCells = 4
 
 local windowCenter = {
     x = love.graphics.getWidth()/2,
