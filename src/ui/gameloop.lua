@@ -47,6 +47,13 @@ function GameLoop.new(numOfSixSidedDice, numOfEightSidedDice, numOfTenSidedDice,
             x = windowCenter.x,
             y = windowCenter.y,
             scale = 7
+        },
+        warning = {
+            message = "PROGRESS WILL BE LOST",
+            font = fonts.default,
+            x = windowCenter.x,
+            y = windowCenter.y,
+            scale = 3
         }
     }
 
@@ -171,6 +178,8 @@ function GameLoop:init()
     self.exitWindow.y = windowCenter.y - self.exitWindow.sprite:getHeight()*self.exitWindow.scale/2
     self.exitWindow.text.x = windowCenter.x - self.exitWindow.text.font:getWidth(self.exitWindow.text.message)*self.exitWindow.text.scale/2
     self.exitWindow.text.y = windowCenter.y - self.exitWindow.text.font:getHeight(self.exitWindow.text.message)*self.exitWindow.text.scale/2 - 70
+    self.exitWindow.warning.x = windowCenter.x - self.exitWindow.warning.font:getWidth(self.exitWindow.warning.message)*self.exitWindow.warning.scale/2
+    self.exitWindow.warning.y = windowCenter.y - self.exitWindow.warning.font:getHeight(self.exitWindow.warning.message)*self.exitWindow.warning.scale/2 + 10
 
     self:initializeButtons()
 end
@@ -231,10 +240,34 @@ function GameLoop:drawGameScreen()
 end
 
 function GameLoop:drawExitMenu()
-    love.graphics.draw(self.exitWindow.sprite, self.exitWindow.x, self.exitWindow.y, 0, self.exitWindow.scale, self.exitWindow.scale)
+    love.graphics.draw(
+        self.exitWindow.sprite,
+        self.exitWindow.x,
+        self.exitWindow.y,
+        0,
+        self.exitWindow.scale,
+        self.exitWindow.scale
+    )
 
     love.graphics.setFont(self.exitWindow.text.font)
-    love.graphics.print("EXIT GAME?", self.exitWindow.text.x, self.exitWindow.text.y, 0, self.exitWindow.text.scale, self.exitWindow.text.scale)
+    love.graphics.print(
+        self.exitWindow.text.message,
+        self.exitWindow.text.x,
+        self.exitWindow.text.y,
+        0,
+        self.exitWindow.text.scale,
+        self.exitWindow.text.scale
+    )
+
+    love.graphics.setFont(self.exitWindow.warning.font)
+    love.graphics.print(
+        self.exitWindow.warning.message,
+        self.exitWindow.warning.x,
+        self.exitWindow.warning.y,
+        0,
+        self.exitWindow.warning.scale,
+        self.exitWindow.warning.scale
+    )
 
     for _, b in ipairs(exitMenuButtons) do
         b:draw()
