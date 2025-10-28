@@ -34,13 +34,6 @@ function GameOver.new()
 end
 
 function GameOver:initializeButtons()
-    local scaler = 5
-    local padding = 10
-    local playButtonWidth = self.defaultFont:getWidth("PLAY AGAIN")*scaler+padding
-    local playButtonHeight = self.defaultFont:getHeight("PLAY AGAIN")*scaler+padding
-    local menuButtonWidth = self.defaultFont:getWidth("MENU")*scaler+padding
-    local menuButtonHeight = self.defaultFont:getHeight("MENU")*scaler+padding
-    -- Play again button
     buttons = {
         Button.new(
             love.graphics.getWidth()/2,
@@ -50,7 +43,7 @@ function GameOver:initializeButtons()
                 sprite = Sprites.basicButton,
                 spriteScaler = 3.6,
                 font = self.defaultFont,
-                textScaler = scaler,
+                textScaler = 4,
                 onClick = function()
                     self.nextState = states.GAME_LOOP
                     self.scoreDisplay.score = 0
@@ -65,7 +58,7 @@ function GameOver:initializeButtons()
                 sprite = Sprites.basicButton,
                 spriteScaler = 3.6,
                 font = self.defaultFont,
-                textScaler = 7.2,
+                textScaler = 6,
                 onClick = function()
                     self.nextState = states.MAIN_MENU
                     self.scoreDisplay.score = 0
