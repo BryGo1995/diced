@@ -1,10 +1,10 @@
 local GameLoop = {}
 GameLoop.__index = GameLoop
 
-local Dice = require("src/ui/dice")
-local Button = require("src/ui/button")
-local Sprites = require("src/ui/sprites")
-local fonts = require("src/ui/fonts")
+local Dice = require("src/core/dice")
+local Button = require("src/ui/components/button")
+local Sprites = require("src/ui/assets/sprites")
+local fonts = require("src/ui/assets/fonts")
 
 local gameWindow = {height = 800, width = 1000}
 local verticalCells = 5

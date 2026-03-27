@@ -1,10 +1,10 @@
 local Menu = {}
 Menu.__index = Menu
 
-local Stats = require("src/ui/stats")
-local Button = require("src/ui/button")
-local Sprites = require("src/ui/sprites")
-local Fonts = require("src/ui/fonts")
+local Stats = require("src/ui/components/stats")
+local Button = require("src/ui/components/button")
+local Sprites = require("src/ui/assets/sprites")
+local Fonts = require("src/ui/assets/fonts")
 
 local buttons = {}
 local globalScaler = 3.6

@@ -1,10 +1,10 @@
 local GameOver = {}
 GameOver.__index = GameOver
 
-local states = require("src/state").states
-local Button = require("src/ui/button")
-local Sprites = require("src/ui/sprites")
-local fonts = require("src/ui/fonts")
+local states = require("src/core/state").states
+local Button = require("src/ui/components/button")
+local Sprites = require("src/ui/assets/sprites")
+local fonts = require("src/ui/assets/fonts")
 
 local buttons = {}
 local buttonWidth = 200
@@ -112,7 +112,7 @@ function GameOver:resetNextState()
 end
 
 function GameOver:writeScoreToFile()
-    local SaveManager = require("src/save_manager")
+    local SaveManager = require("src/core/save_manager")
     local saveManager = SaveManager.new()
     
     -- Load existing save data
