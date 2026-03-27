@@ -1,15 +1,16 @@
-require("conf")
-
-local stateMachine = require("src/state").stateMachine
-local states = require("src/state").states
-local Menu = require("src/ui/menu")
-local Button = require("src/ui/button")
-local GameLoop = require("src/ui/gameloop")
-local GameOver = require("src/ui/gameover")
+local stateMachine = require("src/core/state").stateMachine
+local states = require("src/core/state").states
 
 function love.load()
+    love.math.setRandomSeed(os.time())
+    love.graphics.setDefaultFilter("nearest", "nearest")
+
+    local Menu = require("src/ui/screens/menu")
+    local GameLoop = require("src/ui/screens/gameloop")
+    local GameOver = require("src/ui/screens/gameover")
+
     -- Initialize the game state machine
-    gameState = stateMachine.new() 
+    gameState = stateMachine.new()
 
     -- Initialize the main menu module
     menu = Menu.new()
