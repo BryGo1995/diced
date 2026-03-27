@@ -170,13 +170,13 @@ end
 
 -- Simple data serialization using JSON
 function SaveManager:serializeData(data)
-    local json = require("docs/tools/json")
+    local json = require("src/core/json")
     return json.encode(data)
 end
 
 -- Simple data deserialization using JSON
 function SaveManager:deserializeData(dataString)
-    local json = require("docs/tools/json")
+    local json = require("src/core/json")
     return json.decode(dataString)
 end
 

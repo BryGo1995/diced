@@ -1,7 +1,7 @@
 -- Save system utilities for debugging and management
 local SaveUtils = {}
 
-local SaveManager = require("src/save_manager")
+local SaveManager = require("src/core/save_manager")
 
 -- Print save file information
 function SaveUtils.printSaveInfo()

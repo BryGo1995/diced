@@ -1,8 +1,8 @@
 local Dice = {}
 Dice.__index = Dice
 
-local sprites = require("src/ui/sprites")
-local fonts = require("src/ui/fonts")
+local sprites = require("src/ui/assets/sprites")
+local fonts = require("src/ui/assets/fonts")
 
 function Dice.new(numOfSides, options)
     local self = setmetatable({}, Dice)

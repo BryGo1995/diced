@@ -1,10 +1,10 @@
 local Stats = {}
 Stats.__index = Stats
 
-local Sprites = require("src/ui/sprites")
-local Button = require("src/ui/button")
-local Fonts = require("src/ui/fonts")
-local SaveManager = require("src/save_manager")
+local Sprites = require("src/ui/assets/sprites")
+local Button = require("src/ui/components/button")
+local Fonts = require("src/ui/assets/fonts")
+local SaveManager = require("src/core/save_manager")
 
 function Stats.new()
     local self = setmetatable({}, Stats)
