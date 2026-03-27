@@ -27,6 +27,12 @@ love .
 
 The game uses five dice types: d6, d8, d10, d12, and d20.
 
+## License
+
+The source code is licensed under the [MIT License](LICENSE).
+
+Art assets (sprites, fonts) are © 2026 Bryan Gonzales and licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) — you may share and adapt them with attribution, but not for commercial purposes.
+
 ## Project Structure
 
 ```
