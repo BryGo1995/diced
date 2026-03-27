@@ -1,7 +1,5 @@
 sprites = {}
 
-love.graphics.setDefaultFilter("nearest", "nearest")
-
 sprites.title = love.graphics.newImage("assets/sprites/Diced-transparent.png")
 
 sprites.statsWindow = love.graphics.newImage("assets/sprites/menu/StatsModule.png")
