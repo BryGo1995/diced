@@ -6,7 +6,7 @@ A dice-rolling score game built with [LÖVE](https://love2d.org/) (Love2D).
 
 ## How to Play
 
-Every round, roll your dice and decide which to sacrifice — but you **must** remove at least one each turn.
+Every round, roll your dice and decide which to sacrifice — you **must** remove at least one, but you can remove as many as you want.
 
 **Scoring:** When you remove a die, your score increases by the difference between the die's value and its maximum. Roll a d6 and land on 6? Perfect — that's **+0**. Roll a d12 and land on 10? That's **+2**. Every pip below the max counts against you.
 
