@@ -78,3 +78,12 @@ function love.mousepressed(x, y, button)
         print("Invalid state")
     end
 end
+
+function love.keypressed(key)
+    local currentState = gameState:getState()
+    if currentState == states.GAME_LOOP then
+        if key == "escape" then
+            gameLoop:toggleExitMenu()
+        end
+    end
+end

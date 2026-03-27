@@ -305,6 +305,10 @@ function GameLoop:onClick(x, y)
     end
 end
 
+function GameLoop:toggleExitMenu()
+    self.displayExitMenu = not self.displayExitMenu
+end
+
 function GameLoop:isGameOver()
     local gameOver = true
     for i = 1, self.numOfDice do
