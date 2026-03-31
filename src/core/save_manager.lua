@@ -1,6 +1,28 @@
 local SaveManager = {}
 SaveManager.__index = SaveManager
 
+-- Bit library compatibility shim for love.js (web builds use Lua 5.1 without LuaJIT)
+local bit = bit or (function()
+    local function bitop(a, b, oper)
+        local r, m = 0, 2^31
+        repeat
+            local sa = a >= m and 1 or 0
+            local sb = b >= m and 1 or 0
+            r = r + m * oper(sa, sb)
+            a = a - sa * m
+            b = b - sb * m
+            m = m / 2
+        until m < 1
+        return r
+    end
+    return {
+        bxor   = function(a, b) return bitop(a % 2^32, b % 2^32, function(x, y) return x ~= y and 1 or 0 end) end,
+        band   = function(a, b) return bitop(a % 2^32, b % 2^32, function(x, y) return x == 1 and y == 1 and 1 or 0 end) end,
+        rshift = function(a, n) return math.floor(a % 2^32 / 2^n) end,
+        lshift = function(a, n) return (a * 2^n) % 2^32 end,
+    }
+end)()
+
 -- Simple XOR encryption key (you can change this to any string)
 local ENCRYPTION_KEY = "DicedGame2024!@#"
 local SAVE_FILE = "game_save.dat"
